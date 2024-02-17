@@ -1,0 +1,17 @@
+{
+  "name": "casters",
+  "version": "0.1.0",
+  "description": "Clean Architecture for Software in TypeScript, Exploring Responsibility-driven design and SOLID",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc-watch --onSuccess \"node dist/index.js\"",
+    "build": "tsc"
+  },
+  "private": true,
+  "devDependencies": {
+    "tsc-watch": "^6.0.4",
+    "tslint": "^6.1.3",
+    "typescript": "^5.3.3"
+  },
+  "type": "module"
+}
