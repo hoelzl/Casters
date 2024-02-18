@@ -6,6 +6,10 @@ export class InvestigateAction implements Action {
     return "Investigate the current location.";
   }
 
+  get shortDescription(): string {
+    return "Investigate";
+  }
+
   get tags(): Set<ActionTag> {
     return new Set([ActionTag.Investigation, ActionTag.Aggressive]);
   }

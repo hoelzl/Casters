@@ -1,5 +1,6 @@
 import { Action, ActionTag } from "../action";
 import { Player } from "../player";
+import { capitalizeFirstLetter } from "../utils";
 
 export class MoveAction implements Action {
   constructor(public direction: string) {
@@ -8,6 +9,10 @@ export class MoveAction implements Action {
 
   get description(): string {
     return `Move ${this._direction}.`;
+  }
+
+  get shortDescription(): string {
+    return `Move ${capitalizeFirstLetter(this._direction)}`;
   }
 
   get tags(): Set<ActionTag> {

@@ -5,10 +5,10 @@ import { QuitAction } from "./quitAction";
 import { SkipTurnAction } from "./skipTurnAction";
 
 const allDefaultActionTypes: ActionType[] = [
-  ErrorAction,
   InvestigateAction,
   QuitAction,
   SkipTurnAction,
+  ErrorAction,
 ];
 
 let defaultActionsRegistered: boolean = false;

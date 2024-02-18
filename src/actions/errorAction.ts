@@ -7,8 +7,13 @@ export class ErrorAction implements Action {
     ActionTag.TestOnly,
     ActionTag.InteractiveOnly,
   ]);
+
   get description(): string {
     return "Throw an error for testing purposes.";
+  }
+
+  get shortDescription(): string {
+    return "TEST: Error";
   }
 
   get tags(): Set<ActionTag> {

@@ -25,6 +25,7 @@ export enum ActionTag {
 
 export interface Action {
   get description(): string;
+  get shortDescription(): string;
 
   get tags(): Set<ActionTag>;
 

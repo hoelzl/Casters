@@ -15,8 +15,9 @@ export class SelectActionInteractively implements Strategy {
 
   async pickAction(actions: Action[]): Promise<Action> {
     const choices = actions.map((a) => ({
-      name: a.description,
+      name: a.shortDescription,
       value: a,
+      description: a.description,
     }));
     return select({
       message: "Choose an action",

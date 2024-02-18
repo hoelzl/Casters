@@ -8,6 +8,10 @@ export class HealAction implements Action {
     return "Heal yourself or another player.";
   }
 
+  get shortDescription(): string {
+    return "Heal";
+  }
+
   get tags(): Set<ActionTag> {
     return HealAction._tags;
   }

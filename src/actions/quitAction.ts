@@ -12,6 +12,10 @@ export class QuitAction implements Action {
     return "Quit the game.";
   }
 
+  get shortDescription(): string {
+    return "Quit";
+  }
+
   get tags(): Set<ActionTag> {
     return new Set([ActionTag.Quit, ActionTag.InteractiveOnly]);
   }
