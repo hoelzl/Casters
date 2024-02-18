@@ -1,23 +1,29 @@
-import { Location } from "./location";
-import { Strategy } from "./strategy";
-import { Pawn } from "./pawn";
-import { Action } from "./action";
-import { GameObserver } from "./gameObserver";
-import { SkipTurnAction } from "./actions/skipTurnAction";
-import { PlayerObserver } from "./playerObserver";
+import { Action, ActionTag, getDefaultActions } from "./action";
 import { MoveAction } from "./actions/moveAction";
-import { InvestigateAction } from "./actions/investigateAction";
 import { QuitAction } from "./actions/quitAction";
-import { ErrorAction } from "./actions/errorAction";
+import { SkipTurnAction } from "./actions/skipTurnAction";
 import config from "./config";
-import { HealAction } from "./actions/healAction";
+import { GameObserver } from "./gameObserver";
+import { Location } from "./location";
+import { Pawn } from "./pawn";
+import { PlayerObserver } from "./playerObserver";
+import { Strategy } from "./strategy";
 
 export class Player {
   private _pawn: Pawn;
-  private readonly _strategy: Strategy;
 
   constructor(name: string, location: Location, strategy: Strategy) {
     this._pawn = new Pawn(name, location);
+    this._strategy = strategy;
+  }
+
+  private _strategy: Strategy;
+
+  get strategy(): Strategy {
+    return this._strategy;
+  }
+
+  set strategy(strategy: Strategy) {
     this._strategy = strategy;
   }
 
@@ -33,10 +39,6 @@ export class Player {
     return `${this.name} at ${this.location.name}`;
   }
 
-  get strategy(): Strategy {
-    return this._strategy;
-  }
-
   moveToLocation(location: Location): void {
     this._pawn.moveToLocation(location);
   }
@@ -50,20 +52,38 @@ export class Player {
     this.performIfPossible(action);
   }
 
-  getPossibleActions(): Action[] {
+  getNonInteractiveDefaultActions(
+    addTestOnlyActions: boolean = false,
+  ): Action[] {
+    return getDefaultActions().filter((action) => {
+      if (!addTestOnlyActions && action.tags.has(ActionTag.TestOnly)) {
+        return false;
+      }
+      return !action.tags.has(ActionTag.InteractiveOnly);
+    });
+  }
+
+  getInteractiveDefaultActions(addTestOnlyActions: boolean = false): Action[] {
+    return getDefaultActions().filter((action) => {
+      if (!addTestOnlyActions && action.tags.has(ActionTag.TestOnly)) {
+        return false;
+      }
+      return action.tags.has(ActionTag.InteractiveOnly);
+    });
+  }
+
+  getPossibleActions(addTestOnlyActions: boolean = config.debug): Action[] {
     let result: Action[] = [];
     for (let [direction, _] of this.location.exits) {
       result.push(new MoveAction(direction));
     }
-    // TODO: Figure out a way to make this more dynamic
-    result.push(new InvestigateAction());
-    result.push(new SkipTurnAction());
-    result.push(new HealAction());
+    result = result.concat(
+      this.getNonInteractiveDefaultActions(addTestOnlyActions),
+    );
     if (this.strategy.isInteractive) {
-      result.push(new QuitAction());
-      if (config.debug) {
-        result.push(new ErrorAction());
-      }
+      result = result.concat(
+        this.getInteractiveDefaultActions(addTestOnlyActions),
+      );
     }
     this.notePossibleActions(result);
     return result;

@@ -15,6 +15,8 @@ export enum ActionTag {
   SkipTurn,
   Quit,
   Save,
+  // Action Properties
+  InteractiveOnly,
   Error,
   TestOnly,
   // Size of set for action tags
@@ -23,6 +25,20 @@ export enum ActionTag {
 
 export interface Action {
   get description(): string;
+
   get tags(): Set<ActionTag>;
+
   perform(player: Player): void;
+}
+
+// type ActionType = { new (): Action };
+
+const defaultActions: Action[] = [];
+
+export function registerDefaultActions(action: Action): void {
+  defaultActions.push(action);
+}
+
+export function getDefaultActions(): Action[] {
+  return defaultActions;
 }

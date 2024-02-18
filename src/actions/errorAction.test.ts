@@ -12,7 +12,7 @@ describe("ErrorAction", () => {
 
   test("has correct tags", () => {
     expect(new ErrorAction().tags).toEqual(
-      new Set([ActionTag.Error, ActionTag.TestOnly]),
+      new Set([ActionTag.Error, ActionTag.TestOnly, ActionTag.InteractiveOnly]),
     );
   });
 

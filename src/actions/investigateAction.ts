@@ -1,4 +1,4 @@
-import { Action, ActionTag } from "../action";
+import { Action, ActionTag, registerDefaultActions } from "../action";
 import { Player } from "../player";
 
 export class InvestigateAction implements Action {
@@ -14,3 +14,5 @@ export class InvestigateAction implements Action {
     return new Set([ActionTag.Investigation, ActionTag.Aggressive]);
   }
 }
+
+registerDefaultActions(new InvestigateAction());

@@ -1,15 +1,27 @@
-import { Player } from "../player";
-import { createWorldFromJsonData } from "../worldFactory";
-import { World } from "../world";
-import { SkipTurnStrategy } from "../strategies/skipTurnStrategy";
 import * as simpleGameData from "../data/simpleGame.json";
+import { GameObserver } from "../gameObserver";
+import { Player } from "../player";
+import { SkipTurnStrategy } from "../strategies/skipTurnStrategy";
+import { Strategy } from "../strategy";
+import { World } from "../world";
+import { createWorldFromJsonData } from "../worldFactory";
 
-export function createWorldAndPlayer(): [World, Player] {
+type WorldAndPlayerParams = {
+  strategy?: Strategy;
+  observer?: GameObserver;
+};
+
+export function createWorldAndPlayer(
+  params: WorldAndPlayerParams = {},
+): [World, Player] {
   const world = createWorldFromJsonData(simpleGameData);
   const player = new Player(
     "Test Player",
     world.getLocation("Room 1"),
-    new SkipTurnStrategy(),
+    params?.strategy ?? new SkipTurnStrategy(),
   );
+  if (params.observer) {
+    player.registerObserver(params.observer);
+  }
   return [world, player];
 }
