@@ -1,5 +1,5 @@
-import {Action} from "./action.js";
-import {Player} from "./player.js";
+import {Action} from "./action";
+import {Player} from "./player";
 
 export interface PlayerObserver {
     notify(player: Player, msg: string): void;

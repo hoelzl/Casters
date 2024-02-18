@@ -1,6 +1,6 @@
-import {Result} from "./result.js";
-import {Game} from "./game.js";
-import {PlayerObserver} from "./playerObserver.js";
+import {Result} from "./result";
+import {Game} from "./game";
+import {PlayerObserver} from "./playerObserver";
 
 export enum GameOverReason {
     PlayerWon,

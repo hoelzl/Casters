@@ -1,4 +1,4 @@
-import {Location} from "./location.js";
+import {Location} from "./location";
 
 export class World {
     constructor(initialLocationName: string, locations: Map<string, Location>) {
@@ -26,6 +26,13 @@ export class World {
         return location;
     }
 
-    private _locationMap: Map<string, Location>;
-    private _initialLocationName: string;
+    addLocation(location: Location): void {
+        if (this._locationMap.has(location.name)) {
+            throw new Error(`Location ${location.name} already exists`);
+        }
+        this._locationMap.set(location.name, location);
+    }
+
+    private readonly _locationMap: Map<string, Location>;
+    private readonly _initialLocationName: string;
 }

@@ -1,15 +1,16 @@
-import {Action, ActionTag} from "../action.js";
-import {Player} from "../player.js";
+import { Action, ActionTag } from "../action";
+import { Player } from "../player";
 
 export class InvestigateAction implements Action {
-    get description(): string {
-        return "Investigate the current location.";
-    }
+  get description(): string {
+    return "Investigate the current location.";
+  }
 
-    perform(player: Player): void {
-    }
+  perform(player: Player): void {
+    throw new Error("Not implemented.");
+  }
 
-    get tags(): Set<ActionTag> {
-        return new Set([ActionTag.Investigation, ActionTag.Aggressive]);
-    }
+  get tags(): Set<ActionTag> {
+    return new Set([ActionTag.Investigation, ActionTag.Aggressive]);
+  }
 }

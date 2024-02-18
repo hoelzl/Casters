@@ -1,0 +1,78 @@
+{
+  "initialLocation": "Vestibule",
+  "locations": [
+    {
+      "name": "Vestibule",
+      "description": "You are in the Vestibule",
+      "connections": [
+        {
+          "direction": "north",
+          "destination": "Entrance Hall"
+        }
+      ]
+    },
+    {
+      "name": "Entrance Hall",
+      "description": "You are in the Entrance Hall",
+      "connections": [
+        {
+          "direction": "west",
+          "destination": "Dark Corridor"
+        },
+        {
+          "direction": "east",
+          "destination": "Brightly Lit Corridor"
+        },
+        {
+          "direction": "south",
+          "destination": "Vestibule"
+        }
+      ]
+    },
+    {
+      "name": "Dark Corridor",
+      "description": "You are in the Dark Corridor",
+      "connections": [
+        {
+          "direction": "west",
+          "destination": "Treasure Chamber"
+        },
+        {
+          "direction": "east",
+          "destination": "Entrance Hall"
+        }
+      ]
+    },
+    {
+      "name": "Brightly Lit Corridor",
+      "description": "You are in the Brightly Lit Corridor",
+      "connections": [
+        {
+          "direction": "west",
+          "destination": "Entrance Hall"
+        }
+      ],
+      "items": [
+        {
+          "kind": "Torch"
+        }
+      ]
+    },
+    {
+      "name": "Treasure Chamber",
+      "description": "You are in the Treasure Chamber",
+      "connections": [
+        {
+          "direction": "east",
+          "destination": "Dark Corridor"
+        }
+      ],
+      "items": [
+        {
+          "kind": "Treasure Chest",
+          "description": "An ominous looking treasure chest"
+        }
+      ]
+    }
+  ]
+}
