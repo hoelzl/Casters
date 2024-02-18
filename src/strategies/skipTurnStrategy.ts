@@ -8,7 +8,7 @@ export class SkipTurnStrategy implements Strategy {
     return false;
   }
 
-  selectAction(_player: Player, _actions: Action[]): Action {
-    return new SkipTurnAction();
+  selectAction(_player: Player, _actions: Action[]): Promise<Action> {
+    return Promise.resolve(new SkipTurnAction());
   }
 }

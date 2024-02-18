@@ -28,7 +28,7 @@ export interface Action {
 
   get tags(): Set<ActionTag>;
 
-  perform(player: Player): void;
+  perform(player: Player): Promise<void>;
 }
 
 // type ActionType = { new (): Action };

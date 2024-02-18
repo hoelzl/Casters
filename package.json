@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npx tsc",
+    "compile": "tsc-watch",
     "start": "tsc-watch --onSuccess \"node dist/index.js\"",
     "test": "jest",
     "test:watch": "jest --watch"
@@ -16,5 +17,8 @@
     "ts-jest": "^29.1.2",
     "tsc-watch": "^6.0.4",
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^4.0.0"
   }
 }

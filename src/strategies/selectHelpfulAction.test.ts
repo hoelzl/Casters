@@ -11,27 +11,33 @@ describe("SelectHelpfulAction", () => {
     expect(new SelectHelpfulAction().isInteractive).toBe(false);
   });
 
-  test("selectAction() returns SkipTurnAction if no actions", () => {
+  test("selectAction() returns SkipTurnAction if no actions", async () => {
     const player = createPlayer();
-    const action = new SelectHelpfulAction().selectAction(player, []);
+    const action = await new SelectHelpfulAction().selectAction(player, []);
     expect(action).toBeInstanceOf(SkipTurnAction);
   });
 
-  test("selectAction() returns helpful action if available", () => {
+  test("selectAction() returns helpful action if available", async () => {
     const player = createPlayer();
     const actions = [
       new MoveAction("north"),
       new HealAction(),
       new MoveAction("south"),
     ];
-    const action = new SelectHelpfulAction().selectAction(player, actions);
+    const action = await new SelectHelpfulAction().selectAction(
+      player,
+      actions,
+    );
     expect(action.tags).toContain(ActionTag.Helpful);
   });
 
-  test("selectAction() returns random action if no helpful actions", () => {
+  test("selectAction() returns random action if no helpful actions", async () => {
     const player = createPlayer();
     const actions = [new MoveAction("north"), new MoveAction("south")];
-    const action = new SelectHelpfulAction().selectAction(player, actions);
+    const action = await new SelectHelpfulAction().selectAction(
+      player,
+      actions,
+    );
     expect(action).toBeInstanceOf(MoveAction);
   });
 });

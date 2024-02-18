@@ -24,6 +24,7 @@ export class Player {
     return this._strategy;
   }
 
+  // noinspection JSUnusedGlobalSymbols
   set strategy(strategy: Strategy) {
     this._strategy = strategy;
   }
@@ -36,6 +37,7 @@ export class Player {
     return this._pawn.location;
   }
 
+  // noinspection JSUnusedGlobalSymbols
   get description(): string {
     return `${this.name} at ${this.location.name}`;
   }
@@ -44,13 +46,30 @@ export class Player {
     this._pawn.moveToLocation(location);
   }
 
-  takeTurn(): void {
+  async takeTurn(): Promise<void> {
     let actions = this.getPossibleActions();
-    let action = this.selectAction(actions);
+    let action = await this.selectAction(actions);
     if (!action) {
       action = new SkipTurnAction();
     }
-    this.performIfPossible(action);
+    return this.performIfPossible(action);
+  }
+
+  getPossibleActions(addTestOnlyActions: boolean = config.debug): Action[] {
+    let result: Action[] = [];
+    for (let [direction, _] of this.location.exits) {
+      result.push(new MoveAction(direction));
+    }
+    result = result.concat(
+      this.getNonInteractiveDefaultActions(addTestOnlyActions),
+    );
+    if (this.strategy.isInteractive) {
+      result = result.concat(
+        this.getInteractiveDefaultActions(addTestOnlyActions),
+      );
+    }
+    this.notePossibleActions(result);
+    return result;
   }
 
   getNonInteractiveDefaultActions(
@@ -73,38 +92,22 @@ export class Player {
     });
   }
 
-  getPossibleActions(addTestOnlyActions: boolean = config.debug): Action[] {
-    let result: Action[] = [];
-    for (let [direction, _] of this.location.exits) {
-      result.push(new MoveAction(direction));
-    }
-    result = result.concat(
-      this.getNonInteractiveDefaultActions(addTestOnlyActions),
-    );
-    if (this.strategy.isInteractive) {
-      result = result.concat(
-        this.getInteractiveDefaultActions(addTestOnlyActions),
-      );
-    }
-    this.notePossibleActions(result);
-    return result;
-  }
-
-  selectAction(actions: Action[]): Action {
+  async selectAction(actions: Action[]): Promise<Action> {
     if (actions.length === 0) {
       return new SkipTurnAction();
     }
     return this.strategy.selectAction(this, actions);
   }
 
-  perform(action: Action): void {
-    action.perform(this);
+  async perform(action: Action): Promise<void> {
+    this.noteStartingAction(action);
+    await action.perform(this);
     this.noteActionPerformed(action);
   }
 
-  performIfPossible(action: Action): void {
+  async performIfPossible(action: Action): Promise<void> {
     try {
-      this.perform(action);
+      await this.perform(action);
     } catch (e: any) {
       if (e instanceof QuitGameException) {
         this.noteGameQuit();
@@ -118,16 +121,15 @@ export class Player {
     this._observers.push(observer);
   }
 
-  // noinspection JSUnusedLocalSymbols
-  private notify(msg: string): void {
-    for (let observer of this._observers) {
-      observer.notify(this, msg);
-    }
-  }
-
   private notePossibleActions(actions: Action[]): void {
     for (let observer of this._observers) {
       observer.notePossibleActions(this, actions);
+    }
+  }
+
+  private noteStartingAction(action: Action): void {
+    for (let observer of this._observers) {
+      observer.noteStartingAction(this, action);
     }
   }
 

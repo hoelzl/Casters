@@ -14,6 +14,7 @@ export class Game {
     }
   }
 
+  // noinspection JSUnusedGlobalSymbols
   addPlayerByName(name: string, strategy: Strategy): Player {
     return this.addPlayerByLocation(
       name,
@@ -47,13 +48,14 @@ export class Game {
     this._observers.push(observer);
   }
 
-  run(): void {
+  // noinspection JSUnusedGlobalSymbols
+  async run(): Promise<void> {
     try {
       this.notifyGameStarted();
       for (let player of this._players) {
         for (let i = 0; i < 10; i++) {
           this.notifyTurnStarted(player);
-          player.takeTurn();
+          await player.takeTurn();
         }
       }
       this.notifyGameOver(GameOverReason.TurnLimitReached);

@@ -1,14 +1,26 @@
-import { Strategy } from "../strategy";
-import { Player } from "../player";
+import select from "@inquirer/select";
 import { Action } from "../action";
-import { SkipTurnAction } from "../actions/skipTurnAction";
+import { Player } from "../player";
+import { Strategy } from "../strategy";
 
+// noinspection JSUnusedGlobalSymbols
 export class SelectActionInteractively implements Strategy {
   get isInteractive(): boolean {
     return true;
   }
 
-  selectAction(_player: Player, actions: Action[]): Action {
-    return actions?.[0] ?? new SkipTurnAction();
+  async selectAction(player: Player, actions: Action[]): Promise<Action> {
+    return await this.pickAction(actions);
+  }
+
+  async pickAction(actions: Action[]): Promise<Action> {
+    const choices = actions.map((a) => ({
+      name: a.description,
+      value: a,
+    }));
+    return select({
+      message: "Choose an action",
+      choices: choices,
+    });
   }
 }

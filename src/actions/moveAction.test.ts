@@ -12,18 +12,19 @@ describe("MoveAction", () => {
     expect(new MoveAction("north").tags).toEqual(new Set([ActionTag.Movement]));
   });
 
-  test("perform() moves the player for valid direction", () => {
+  test("perform() moves the player for valid direction", async () => {
     const player = createPlayer();
     const action: MoveAction = new MoveAction("north");
-    action.perform(player);
+    await action.perform(player);
     expect(player.location.name).toBe("Room 2");
   });
 
-  test("perform() does nothing for invalid direction", () => {
+  test("perform() returns rejected promise for invalid direction", () => {
     const player = createPlayer();
     const action: MoveAction = new MoveAction("invalid");
 
-    expect(() => action.perform(player)).toThrow(
+    expect(action.perform(player)).rejects.toHaveProperty(
+      "message",
       "Exit 'invalid' does not exist.",
     );
   });

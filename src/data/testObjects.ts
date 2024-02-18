@@ -39,8 +39,8 @@ export class InteractiveStrategyForTests implements Strategy {
     return true;
   }
 
-  selectAction(_player: Player, actions: Action[]): Action {
-    return actions?.[0] ?? new SkipTurnAction();
+  selectAction(_player: Player, actions: Action[]): Promise<Action> {
+    return Promise.resolve(actions?.[0] ?? new SkipTurnAction());
   }
 }
 
@@ -49,7 +49,7 @@ export class ErrorStrategyForTests implements Strategy {
     return true;
   }
 
-  selectAction(_player: Player, _actions: Action[]): Action {
+  selectAction(_player: Player, _actions: Action[]): Promise<Action> {
     throw new Error("This strategy always throws an error.");
   }
 }
@@ -61,6 +61,10 @@ export class GameObserverForTests implements GameObserver {
     this.calls.push(
       `noteActionImpossible: ${action.constructor.name} (${reason})`,
     );
+  }
+
+  noteStartingAction(_player: Player, action: Action) {
+    this.calls.push(`noteStartingAction: ${action.constructor.name}`);
   }
 
   noteActionPerformed(_player: Player, action: Action): void {
@@ -85,7 +89,7 @@ export class GameObserverForTests implements GameObserver {
     );
   }
 
-  noteResult(game: Game, result: Result): void {
+  noteResult(_game: Game, result: Result): void {
     this.calls.push(`noteResult: ${result.description}`);
   }
 
@@ -93,7 +97,7 @@ export class GameObserverForTests implements GameObserver {
     this.calls.push(`noteTurnStarted: ${player.name}`);
   }
 
-  noteGameQuit(player: Player, reason: string) {
+  noteGameQuit(_player: Player, reason: string) {
     this.calls.push(`noteQuitAction: ${reason}`);
   }
 

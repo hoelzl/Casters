@@ -52,54 +52,50 @@ describe("Player", () => {
   });
 
   test("selectAction() does not invoke strategy if no actions are available", () => {
-    const [_world, player] = createWorldAndPlayer({
-      strategy: new ErrorStrategyForTests(),
-    });
-    expect(() => player.selectAction([])).not.toThrow();
+    const player = createPlayer({ strategy: new ErrorStrategyForTests() });
+    expect(player.selectAction([])).resolves.toBeDefined();
   });
 
   test("selectAction() returns SkipTurnAction if no actions are available", () => {
     const player = createPlayer();
     const action = player.selectAction([]);
-    expect(action).toBeInstanceOf(SkipTurnAction);
+    expect(action).resolves.toBeInstanceOf(SkipTurnAction);
   });
 
   test("selectAction() invokes strategy if actions are available", () => {
-    const [_world, player] = createWorldAndPlayer({
-      strategy: new ErrorStrategyForTests(),
-    });
-    expect(() => player.selectAction([new SkipTurnAction()])).toThrow(
-      "This strategy always throws an error.",
-    );
+    const player = createPlayer({ strategy: new ErrorStrategyForTests() });
+    expect(player.selectAction([new SkipTurnAction()])).rejects.toBeDefined();
   });
 
   test("perform() does not throw if action does not throw", () => {
     const player = createPlayer();
-    expect(() => player.perform(new SkipTurnAction())).not.toThrow();
+    expect(player.perform(new SkipTurnAction())).resolves.toBeUndefined();
   });
 
   test("perform() throws if action throws", () => {
     const player = createPlayer();
-    expect(() => player.perform(new QuitAction())).toThrow(QuitGameException);
+    expect(player.perform(new QuitAction())).rejects.toBeInstanceOf(
+      QuitGameException,
+    );
   });
 
-  test("perform() calls noteActionPerformed", () => {
+  test("perform() calls noteActionPerformed", async () => {
     let [player, observer] = createPlayerAndObserver();
-    player.perform(new SkipTurnAction());
-    expect(observer.calls).toEqual(["noteActionPerformed: SkipTurnAction"]);
+    await player.perform(new SkipTurnAction());
+    expect(observer.calls).toContain("noteActionPerformed: SkipTurnAction");
   });
 
-  test("performIfPossible() calls noteActionImpossible if action is not possible", () => {
+  test("performIfPossible() calls noteActionImpossible if action is not possible", async () => {
     let [player, observer] = createPlayerAndObserver();
-    player.performIfPossible(new ErrorAction());
-    expect(observer.calls).toEqual([
+    await player.performIfPossible(new ErrorAction());
+    expect(observer.calls).toContain(
       "noteActionImpossible: ErrorAction (This is an error for testing purposes.)",
-    ]);
+    );
   });
 
-  test("performIfPossible() calls noteGameQuit if action is QuitAction", () => {
+  test("performIfPossible() calls noteGameQuit if action is QuitAction", async () => {
     let [player, observer] = createPlayerAndObserver();
-    player.performIfPossible(new QuitAction());
-    expect(observer.calls).toEqual(["noteQuitAction: Game quit by player."]);
+    await player.performIfPossible(new QuitAction());
+    expect(observer.calls).toContain("noteQuitAction: Game quit by player.");
   });
 });

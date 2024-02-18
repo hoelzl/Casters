@@ -10,7 +10,7 @@ export class SkipTurnAction implements Action {
     return new Set([ActionTag.SkipTurn]);
   }
 
-  perform(_player: Player): void {
+  async perform(_player: Player): Promise<void> {
     // Do nothing.
   }
 }

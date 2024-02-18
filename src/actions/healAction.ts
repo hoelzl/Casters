@@ -12,7 +12,7 @@ export class HealAction implements Action {
     return HealAction._tags;
   }
 
-  perform(player: Player): void {
+  async perform(_player: Player): Promise<void> {
     throw new Error("Method not implemented.");
   }
 }

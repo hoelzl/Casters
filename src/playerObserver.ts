@@ -8,6 +8,8 @@ export interface PlayerObserver {
 
   notePossibleActions(player: Player, actions: Action[]): void;
 
+  noteStartingAction(player: Player, action: Action): void;
+
   noteActionPerformed(player: Player, action: Action): void;
 
   noteActionImpossible(player: Player, action: Action, reason: string): void;

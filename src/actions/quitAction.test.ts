@@ -17,6 +17,6 @@ describe("QuitAction", () => {
   test("perform() raises QuitGameException", () => {
     const player = createPlayer();
     const action: QuitAction = new QuitAction();
-    expect(() => action.perform(player)).toThrow(QuitGameException);
+    expect(action.perform(player)).rejects.toBeInstanceOf(QuitGameException);
   });
 });

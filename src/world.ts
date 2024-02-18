@@ -27,6 +27,7 @@ export class World {
     return location;
   }
 
+  // noinspection JSUnusedGlobalSymbols
   addLocation(location: Location): void {
     if (this._locationMap.has(location.name)) {
       throw new Error(`Location ${location.name} already exists`);

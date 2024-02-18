@@ -16,10 +16,11 @@ describe("ErrorAction", () => {
     );
   });
 
-  test("perform() raises an error", () => {
+  test("perform() returns rejected promise", () => {
     const player = createPlayer();
     const action: ErrorAction = new ErrorAction();
-    expect(() => action.perform(player)).toThrow(
+    expect(action.perform(player)).rejects.toHaveProperty(
+      "message",
       "This is an error for testing purposes.",
     );
   });

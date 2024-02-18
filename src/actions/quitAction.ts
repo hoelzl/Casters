@@ -16,7 +16,7 @@ export class QuitAction implements Action {
     return new Set([ActionTag.Quit, ActionTag.InteractiveOnly]);
   }
 
-  perform(_player: Player): void {
+  async perform(_player: Player): Promise<void> {
     throw new QuitGameException();
   }
 }

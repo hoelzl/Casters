@@ -15,7 +15,7 @@ describe("SkipTurnAction", () => {
   test("perform() does nothing", () => {
     const player = createPlayer();
     const action: SkipTurnAction = new SkipTurnAction();
-    expect(() => action.perform(player)).not.toThrow();
+    expect(action.perform(player)).resolves.toBeUndefined();
     expect(player.location.name).toBe("Room 1");
   });
 });

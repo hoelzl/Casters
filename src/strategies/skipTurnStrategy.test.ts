@@ -8,9 +8,9 @@ describe("SkipTurnStrategy", () => {
     expect(new SkipTurnStrategy().isInteractive).toBe(false);
   });
 
-  test("selectAction() returns SkipTurnAction", () => {
+  test("selectAction() returns SkipTurnAction", async () => {
     const player = createPlayer();
-    const action = new SkipTurnStrategy().selectAction(player, []);
+    const action = await new SkipTurnStrategy().selectAction(player, []);
     expect(action).toBeInstanceOf(SkipTurnAction);
   });
 });

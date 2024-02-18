@@ -15,7 +15,7 @@ export class ErrorAction implements Action {
     return ErrorAction._tags;
   }
 
-  perform(_player: Player): void {
+  async perform(_player: Player): Promise<void> {
     throw new Error("This is an error for testing purposes.");
   }
 }

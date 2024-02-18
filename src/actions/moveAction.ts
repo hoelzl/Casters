@@ -10,13 +10,13 @@ export class MoveAction implements Action {
     return `Move ${this._direction}.`;
   }
 
-  perform(player: Player): void {
-    let newLocation = player.location.getExit(this._direction);
-    player.moveToLocation(newLocation);
-  }
-
   get tags(): Set<ActionTag> {
     return new Set([ActionTag.Movement]);
+  }
+
+  async perform(player: Player): Promise<void> {
+    let newLocation = player.location.getExit(this._direction);
+    player.moveToLocation(newLocation);
   }
 
   private readonly _direction: string;
