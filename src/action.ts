@@ -1,5 +1,6 @@
 import { Player } from "./player";
 
+// noinspection JSUnusedGlobalSymbols
 export enum ActionTag {
   // Action types
   Movement,

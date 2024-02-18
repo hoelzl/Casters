@@ -10,6 +10,7 @@ import { InvestigateAction } from "./actions/investigateAction";
 import { QuitAction } from "./actions/quitAction";
 import { ErrorAction } from "./actions/errorAction";
 import config from "./config";
+import { HealAction } from "./actions/healAction";
 
 export class Player {
   private _pawn: Pawn;
@@ -54,8 +55,10 @@ export class Player {
     for (let [direction, _] of this.location.exits) {
       result.push(new MoveAction(direction));
     }
+    // TODO: Figure out a way to make this more dynamic
     result.push(new InvestigateAction());
     result.push(new SkipTurnAction());
+    result.push(new HealAction());
     if (this.strategy.isInteractive) {
       result.push(new QuitAction());
       if (config.debug) {

@@ -10,8 +10,7 @@ describe("SkipTurnStrategy", () => {
 
   test("selectAction() returns SkipTurnAction", () => {
     const [_world, player] = createWorldAndPlayer();
-    const actions = player.getPossibleActions();
-    const action = new SkipTurnStrategy().selectAction(player, actions);
+    const action = new SkipTurnStrategy().selectAction(player, []);
     expect(action).toBeInstanceOf(SkipTurnAction);
   });
 });

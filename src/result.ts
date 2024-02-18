@@ -1,30 +1,34 @@
 export class Result {
-    isGameInProgress(): boolean {
-        return false;
-    }
-    hasPlayerWon(): boolean {
-        return false;
-    }
-    hasPlayerDied(): boolean {
-        return false;
-    }
+  // noinspection JSUnusedGlobalSymbols
+  isGameInProgress(): boolean {
+    return false;
+  }
+  // noinspection JSUnusedGlobalSymbols
+  hasPlayerWon(): boolean {
+    return false;
+  }
+  // noinspection JSUnusedGlobalSymbols
+  hasPlayerDied(): boolean {
+    return false;
+  }
 }
 
 export class GameInProgress extends Result {
-    isGameInProgress(): boolean {
-        return true;
-    }
+  isGameInProgress(): boolean {
+    return true;
+  }
 }
 
+// noinspection JSUnusedGlobalSymbols
 export class PlayerWon extends Result {
-    hasPlayerWon(): boolean {
-        return true;
-    }
+  hasPlayerWon(): boolean {
+    return true;
+  }
 }
 
+// noinspection JSUnusedGlobalSymbols
 export class PlayerDied extends Result {
-    hasPlayerDied(): boolean {
-        return true;
-    }
+  hasPlayerDied(): boolean {
+    return true;
+  }
 }
-

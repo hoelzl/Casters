@@ -25,6 +25,7 @@ export class Location {
     return exit;
   }
 
+  // noinspection JSUnusedGlobalSymbols
   addExit(direction: string, location: Location): void {
     this._exits.set(direction, location);
   }
