@@ -1,7 +1,7 @@
 import { describe, expect, test } from "@jest/globals";
 import { QuitAction, QuitGameException } from "./quitAction";
 import { ActionTag } from "../action";
-import { createWorldAndPlayer } from "../data/testObjects";
+import { createPlayer } from "../data/testObjects";
 
 describe("QuitAction", () => {
   test("has correct description", () => {
@@ -15,7 +15,7 @@ describe("QuitAction", () => {
   });
 
   test("perform() raises QuitGameException", () => {
-    const [_world, player] = createWorldAndPlayer();
+    const player = createPlayer();
     const action: QuitAction = new QuitAction();
     expect(() => action.perform(player)).toThrow(QuitGameException);
   });

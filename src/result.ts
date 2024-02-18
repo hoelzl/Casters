@@ -1,5 +1,8 @@
 export class Result {
-  // noinspection JSUnusedGlobalSymbols
+  get description(): string {
+    return `Result: ${this.constructor.name}`;
+  }
+
   isGameInProgress(): boolean {
     return false;
   }

@@ -1,7 +1,7 @@
 import { describe, expect, test } from "@jest/globals";
 import { SkipTurnAction } from "./skipTurnAction";
 import { ActionTag } from "../action";
-import { createWorldAndPlayer } from "../data/testObjects";
+import { createPlayer } from "../data/testObjects";
 
 describe("SkipTurnAction", () => {
   test("has correct description", () => {
@@ -13,7 +13,7 @@ describe("SkipTurnAction", () => {
   });
 
   test("perform() does nothing", () => {
-    const [_world, player] = createWorldAndPlayer();
+    const player = createPlayer();
     const action: SkipTurnAction = new SkipTurnAction();
     expect(() => action.perform(player)).not.toThrow();
     expect(player.location.name).toBe("Room 1");

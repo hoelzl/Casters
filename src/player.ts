@@ -1,6 +1,6 @@
 import { Action, ActionTag, getDefaultActions } from "./action";
 import { MoveAction } from "./actions/moveAction";
-import { QuitAction } from "./actions/quitAction";
+import { QuitGameException } from "./actions/quitAction";
 import { SkipTurnAction } from "./actions/skipTurnAction";
 import config from "./config";
 import { GameObserver } from "./gameObserver";
@@ -11,6 +11,7 @@ import { Strategy } from "./strategy";
 
 export class Player {
   private _pawn: Pawn;
+  private _observers: PlayerObserver[] = [];
 
   constructor(name: string, location: Location, strategy: Strategy) {
     this._pawn = new Pawn(name, location);
@@ -105,7 +106,7 @@ export class Player {
     try {
       this.perform(action);
     } catch (e: any) {
-      if (e instanceof QuitAction) {
+      if (e instanceof QuitGameException) {
         this.noteGameQuit();
       } else {
         this.noteActionImpossible(action, e.message);
@@ -117,6 +118,7 @@ export class Player {
     this._observers.push(observer);
   }
 
+  // noinspection JSUnusedLocalSymbols
   private notify(msg: string): void {
     for (let observer of this._observers) {
       observer.notify(this, msg);
@@ -142,8 +144,8 @@ export class Player {
   }
 
   private noteGameQuit(): void {
-    this.notify("Game quit by player.");
+    for (let observer of this._observers) {
+      observer.noteGameQuit(this, "Game quit by player.");
+    }
   }
-
-  private _observers: PlayerObserver[] = [];
 }

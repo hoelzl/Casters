@@ -1,6 +1,6 @@
 import { describe, expect, test } from "@jest/globals";
 import { SkipTurnAction } from "../actions/skipTurnAction";
-import { createWorldAndPlayer } from "../data/testObjects";
+import { createPlayer } from "../data/testObjects";
 import { SelectAggressiveAction } from "./selectAggressiveAction";
 import { MoveAction } from "../actions/moveAction";
 import { InvestigateAction } from "../actions/investigateAction";
@@ -12,13 +12,13 @@ describe("SelectAggressiveAction", () => {
   });
 
   test("selectAction() returns SkipTurnAction if no actions", () => {
-    const [_world, player] = createWorldAndPlayer();
+    const player = createPlayer();
     const action = new SelectAggressiveAction().selectAction(player, []);
     expect(action).toBeInstanceOf(SkipTurnAction);
   });
 
   test("selectAction() returns aggressive action if available", () => {
-    const [_world, player] = createWorldAndPlayer();
+    const player = createPlayer();
     const actions = [
       new MoveAction("north"),
       new InvestigateAction(),
@@ -29,7 +29,7 @@ describe("SelectAggressiveAction", () => {
   });
 
   test("selectAction() returns random action if no aggressive actions", () => {
-    const [_world, player] = createWorldAndPlayer();
+    const player = createPlayer();
     const actions = [new MoveAction("north"), new MoveAction("south")];
     const action = new SelectAggressiveAction().selectAction(player, actions);
     expect(action).toBeInstanceOf(MoveAction);

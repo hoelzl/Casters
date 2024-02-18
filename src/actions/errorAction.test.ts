@@ -1,7 +1,7 @@
 import { describe, expect, test } from "@jest/globals";
 import { ErrorAction } from "./errorAction";
 import { ActionTag } from "../action";
-import { createWorldAndPlayer } from "../data/testObjects";
+import { createPlayer } from "../data/testObjects";
 
 describe("ErrorAction", () => {
   test("has correct description", () => {
@@ -17,7 +17,7 @@ describe("ErrorAction", () => {
   });
 
   test("perform() raises an error", () => {
-    const [_world, player] = createWorldAndPlayer();
+    const player = createPlayer();
     const action: ErrorAction = new ErrorAction();
     expect(() => action.perform(player)).toThrow(
       "This is an error for testing purposes.",
