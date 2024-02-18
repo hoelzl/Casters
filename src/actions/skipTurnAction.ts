@@ -1,4 +1,4 @@
-import { Action, ActionTag, registerDefaultActions } from "../action";
+import { Action, ActionTag } from "../action";
 import { Player } from "../player";
 
 export class SkipTurnAction implements Action {
@@ -14,6 +14,3 @@ export class SkipTurnAction implements Action {
     // Do nothing.
   }
 }
-
-// Register this action type with the system
-registerDefaultActions(new SkipTurnAction());

@@ -1,4 +1,4 @@
-import { Action, ActionTag, registerDefaultActions } from "../action";
+import { Action, ActionTag } from "../action";
 import { Player } from "../player";
 
 export class InvestigateAction implements Action {
@@ -14,5 +14,3 @@ export class InvestigateAction implements Action {
     throw new Error("Not implemented.");
   }
 }
-
-registerDefaultActions(new InvestigateAction());

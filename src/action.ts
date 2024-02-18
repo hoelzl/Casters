@@ -31,11 +31,11 @@ export interface Action {
   perform(player: Player): Promise<void>;
 }
 
-// type ActionType = { new (): Action };
+export type ActionType = { new (...args: unknown[]): Action };
 
 const defaultActions: Action[] = [];
 
-export function registerDefaultActions(action: Action): void {
+export function registerDefaultAction(action: Action): void {
   defaultActions.push(action);
 }
 

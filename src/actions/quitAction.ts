@@ -1,4 +1,4 @@
-import { Action, ActionTag, registerDefaultActions } from "../action";
+import { Action, ActionTag } from "../action";
 import { Player } from "../player";
 
 export class QuitGameException extends Error {
@@ -20,6 +20,3 @@ export class QuitAction implements Action {
     throw new QuitGameException();
   }
 }
-
-// Register this action type with the system
-registerDefaultActions(new QuitAction());

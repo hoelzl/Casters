@@ -9,8 +9,8 @@ export class SelectActionInteractively implements Strategy {
     return true;
   }
 
-  async selectAction(player: Player, actions: Action[]): Promise<Action> {
-    return await this.pickAction(actions);
+  async selectAction(_player: Player, actions: Action[]): Promise<Action> {
+    return this.pickAction(actions);
   }
 
   async pickAction(actions: Action[]): Promise<Action> {

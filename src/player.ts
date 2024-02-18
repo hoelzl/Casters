@@ -1,6 +1,7 @@
 import { Action, ActionTag, getDefaultActions } from "./action";
 import { MoveAction } from "./actions/moveAction";
 import { QuitGameException } from "./actions/quitAction";
+import { registerAllDefaultActions } from "./actions/registerDefaultActions";
 import { SkipTurnAction } from "./actions/skipTurnAction";
 import config from "./config";
 import { GameObserver } from "./gameObserver";
@@ -8,6 +9,8 @@ import { Location } from "./location";
 import { Pawn } from "./pawn";
 import { PlayerObserver } from "./playerObserver";
 import { Strategy } from "./strategy";
+
+registerAllDefaultActions();
 
 export class Player {
   private _pawn: Pawn;
@@ -84,12 +87,15 @@ export class Player {
   }
 
   getInteractiveDefaultActions(addTestOnlyActions: boolean = false): Action[] {
-    return getDefaultActions().filter((action) => {
+    console.log("All actions:", getDefaultActions());
+    let actions = getDefaultActions().filter((action) => {
       if (!addTestOnlyActions && action.tags.has(ActionTag.TestOnly)) {
         return false;
       }
       return action.tags.has(ActionTag.InteractiveOnly);
     });
+    console.log("Interactive default actions: ", actions);
+    return actions;
   }
 
   async selectAction(actions: Action[]): Promise<Action> {

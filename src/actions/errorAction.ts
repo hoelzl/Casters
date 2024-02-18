@@ -1,4 +1,4 @@
-import { Action, ActionTag, registerDefaultActions } from "../action";
+import { Action, ActionTag } from "../action";
 import { Player } from "../player";
 
 export class ErrorAction implements Action {
@@ -19,5 +19,3 @@ export class ErrorAction implements Action {
     throw new Error("This is an error for testing purposes.");
   }
 }
-
-registerDefaultActions(new ErrorAction());
