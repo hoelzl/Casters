@@ -1,7 +1,8 @@
 {
   "extends": "../../tsconfig.json", // Adjust the path as necessary to point to your root tsconfig.json
   "compilerOptions": {
-    "baseUrl": "."
+    "baseUrl": ".",
+    "outDir": "./dist"
   },
   "include": [
     "src/**/*.ts",

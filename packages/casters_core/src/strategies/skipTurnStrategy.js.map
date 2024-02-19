@@ -1,1 +1,0 @@
-{"version":3,"file":"skipTurnStrategy.js","sourceRoot":"","sources":["skipTurnStrategy.ts"],"names":[],"mappings":";;;AAGA,8DAA2D;AAE3D,MAAa,gBAAgB;IAC3B,IAAI,aAAa;QACf,OAAO,KAAK,CAAC;IACf,CAAC;IAED,YAAY,CAAC,OAAe,EAAE,QAAkB;QAC9C,OAAO,OAAO,CAAC,OAAO,CAAC,IAAI,+BAAc,EAAE,CAAC,CAAC;IAC/C,CAAC;CACF;AARD,4CAQC"}

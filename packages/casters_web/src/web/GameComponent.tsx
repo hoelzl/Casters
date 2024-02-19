@@ -1,4 +1,3 @@
-// App.tsx or any component
 import React from "react";
 import { useGameState } from "./GameStateContext";
 import { Action } from "casters_core/core/action";

@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.json", // Adjust the path as necessary to point to your root tsconfig.json
   "compilerOptions": {
     "baseUrl": ".",
+    "outDir": "./dist",
     "paths": {
       "casters_core/*": ["../casters_core/src/*"]
     }
