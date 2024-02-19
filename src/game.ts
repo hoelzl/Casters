@@ -1,17 +1,29 @@
 import { GameObserver, GameOverReason } from "./gameObserver";
 import { World } from "./world";
-import { createWorldFromString } from "./worldFactory";
+import {
+  createWorldFromJsonData,
+  createWorldFromString,
+  RawGameData,
+} from "./worldFactory";
 import { Strategy } from "./strategy";
 import { Player } from "./player";
 import { GameInProgress, Result } from "./result";
 import { QuitGameException } from "./actions/quitAction";
 
 export class Game {
-  constructor(gameJson: string, observer?: GameObserver) {
-    this._world = createWorldFromString(gameJson);
+  constructor(gameData: string | RawGameData, observer?: GameObserver) {
+    if (typeof gameData === "string") {
+      this._world = createWorldFromString(gameData);
+    } else {
+      this._world = createWorldFromJsonData(gameData);
+    }
     if (observer) {
       this.registerObserver(observer);
     }
+  }
+
+  get world(): World {
+    return this._world;
   }
 
   // noinspection JSUnusedGlobalSymbols
@@ -100,7 +112,7 @@ export class Game {
     }
   }
 
-  private _world: World;
+  private readonly _world: World;
   private _players: Player[] = [];
   private _observers: GameObserver[] = [];
   private _result: Result = new GameInProgress();

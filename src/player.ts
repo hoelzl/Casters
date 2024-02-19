@@ -87,15 +87,12 @@ export class Player {
   }
 
   getInteractiveDefaultActions(addTestOnlyActions: boolean = false): Action[] {
-    console.log("All actions:", getDefaultActions());
-    let actions = getDefaultActions().filter((action) => {
+    return getDefaultActions().filter((action) => {
       if (!addTestOnlyActions && action.tags.has(ActionTag.TestOnly)) {
         return false;
       }
       return action.tags.has(ActionTag.InteractiveOnly);
     });
-    console.log("Interactive default actions: ", actions);
-    return actions;
   }
 
   async selectAction(actions: Action[]): Promise<Action> {
@@ -117,6 +114,7 @@ export class Player {
     } catch (e: any) {
       if (e instanceof QuitGameException) {
         this.noteGameQuit();
+        throw e;
       } else {
         this.noteActionImpossible(action, e.message);
       }
