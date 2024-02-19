@@ -1,17 +1,14 @@
 // GameStateContext.tsx
-import { SelectHelpfulAction } from "casters_core/strategies/selectHelpfulAction";
 import React, {
   createContext,
-  useContext,
-  useState,
-  useEffect,
   useCallback,
+  useContext,
+  useEffect,
+  useState,
 } from "react";
-import { Location } from "casters_core/core/location";
-import { Player } from "casters_core/core/player";
+import { Action, Game, gameData, Location, Player } from "./exports";
 import { GameState, UpdateStateObserver } from "./GameState";
-import { Game } from "casters_core/core/game";
-import * as gameData from "casters_core/data/dungeon.json";
+import { Resolver, SelectActionUsingReact } from "./SelectActionUsingReact";
 
 const initialState: GameState = {
   currentLocation: new Location("Invalid Location", ""),
@@ -20,9 +17,11 @@ const initialState: GameState = {
 
 const GameStateContext = createContext<{
   gameState: GameState;
+  resolver: Resolver;
   startGame: () => Promise<void>;
 }>({
   gameState: initialState,
+  resolver: async (_action: Action) => {},
   startGame: async () => {},
 });
 
@@ -30,33 +29,63 @@ type StateProps = {
   children: React.ReactNode;
 };
 
-function createGame(): Game {
+function createGameAndPlayer(
+  setResolver: (resolver: Resolver) => void,
+): [Game, Player] {
   const game = new Game(gameData);
   const interactivePlayer = new Player(
     "Interactive Player",
     game.world.initialLocation,
-    new SelectHelpfulAction(),
+    new SelectActionUsingReact(setResolver),
   );
   game.addPlayer(interactivePlayer);
-  return game;
+  return [game, interactivePlayer];
+}
+
+function createAndConfigureGameAndPlayer(
+  setResolver: (resolver: Resolver) => void,
+): [Game, Player] {
+  const [game, player] = createGameAndPlayer(setResolver);
+  initialState.currentLocation = player.location;
+  initialState.availableActions = player.getPossibleActions();
+  return [game, player];
+}
+
+function createAndConfigureObserver(
+  game: Game,
+  gameState: GameState,
+  setGameState: (
+    value: ((prevState: GameState) => GameState) | GameState,
+  ) => void,
+) {
+  const observer = new UpdateStateObserver(gameState);
+  game.registerObserver(observer);
+  const updateGameStateFromObserver = () => {
+    console.log("GameStateProvider.updateGameStateFromObserver()");
+    setGameState({ ...observer.state });
+  };
+  observer.onStateChange = updateGameStateFromObserver;
+  return updateGameStateFromObserver;
 }
 
 export const GameStateProvider: React.FC<StateProps> = ({ children }) => {
   const [gameState, setGameState] = useState<GameState>(initialState);
+  const [resolver, setResolver] = useState<Resolver>(() => {});
+
+  const [game] = createAndConfigureGameAndPlayer(setResolver);
+  // noinspection JSUnusedLocalSymbols
+  const updateGameStateFromObserver = createAndConfigureObserver(
+    game,
+    gameState,
+    setGameState,
+  );
 
   // Function to start the game
   const startGame = useCallback(async () => {
-    const game = createGame();
-    initialState.currentLocation = game.world.initialLocation;
-    const observer = new UpdateStateObserver(gameState);
-    game.registerObserver(observer);
-
+    console.log("GameStateProvider.startGame()");
     await game.run();
-
-    // Update React state whenever the observer modifies the game state
-    const updateGameState = () => setGameState({ ...observer.state });
-    observer.onStateChange = updateGameState;
-    updateGameState();
+    // updateGameStateFromObserver();
+    // updateGameStateFromStrategy();
   }, []);
 
   useEffect(() => {
@@ -64,7 +93,7 @@ export const GameStateProvider: React.FC<StateProps> = ({ children }) => {
   }, [startGame]);
 
   return (
-    <GameStateContext.Provider value={{ gameState, startGame }}>
+    <GameStateContext.Provider value={{ gameState, resolver, startGame }}>
       {children}
     </GameStateContext.Provider>
   );

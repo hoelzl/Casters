@@ -19,9 +19,11 @@
   },
   "homepage": "https://github.com/hoelzl/Casters#readme",
   "dependencies": {
+    "@types/core-js": "^2.5.8",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "casters_core": "*",
+    "core-js": "^3.36.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "ts-loader": "^9.5.1",

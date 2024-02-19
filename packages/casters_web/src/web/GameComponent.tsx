@@ -1,10 +1,17 @@
 import React from "react";
-import { useGameState } from "./GameStateContext";
-import { Action } from "casters_core/core/action";
+import { Action } from "./exports";
+import { GameState } from "./GameState";
+import { Resolver } from "./SelectActionUsingReact";
 
-export const GameComponent = () => {
-  const { gameState } = useGameState();
+function createButtons(actions: Action[], resolver: (action: Action) => void) {
+  return actions.map((action: Action, index: number) => (
+    <button key={index} onClick={() => resolver(action)}>
+      {action.constructor.name}
+    </button>
+  ));
+}
 
+export const GameComponent = (gameState: GameState, resolver: Resolver) => {
   return (
     <div>
       <h1>Game</h1>
@@ -27,6 +34,8 @@ export const GameComponent = () => {
       {gameState.availableActions.map((action: Action, index: number) => (
         <div key={index}>{action.constructor.name}</div>
       ))}
+      <h2>Buttons</h2>
+      {createButtons(gameState.availableActions, resolver)}
     </div>
   );
 };
