@@ -1,10 +1,10 @@
-import { Action } from "casters_core/core/action";
+import { Action, ActionTag } from "casters_core/core/action";
 import { Game } from "casters_core/core/game";
-import { Location } from "casters_core/core/location";
 import {
   GameObserverBase,
   GameOverReason,
 } from "casters_core/core/gameObserver";
+import { Location } from "casters_core/core/location";
 import { Player } from "casters_core/core/player";
 
 export type GameState = {
@@ -15,7 +15,7 @@ export type GameState = {
 export class UpdateStateObserver extends GameObserverBase {
   constructor(state: GameState) {
     super();
-    this.state = state;
+    this.state = { ...state };
     this.onStateChange = () => {};
   }
 
@@ -25,7 +25,7 @@ export class UpdateStateObserver extends GameObserverBase {
   }
 
   notePossibleActions(_player: Player, actions: Action[]) {
-    this.state.availableActions = actions;
+    this.state.availableActions = this.removeQuitAction(actions);
     this.onStateChange();
   }
 
@@ -36,7 +36,12 @@ export class UpdateStateObserver extends GameObserverBase {
 
   noteTurnStarted(_player: Player) {
     this.state.availableActions = [];
+    this.state.currentLocation = _player.location;
     this.onStateChange();
+  }
+
+  private removeQuitAction(actions: Action[]): Action[] {
+    return actions.filter((action) => !action.tags.has(ActionTag.Quit));
   }
 
   state: GameState;

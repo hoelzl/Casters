@@ -1,7 +1,8 @@
 import { Action, Player, Strategy } from "./exports";
 import "core-js/proposals/promise-with-resolvers";
 
-export type Resolver = (action: Action) => void;
+export type ResolverFun = (action: Action) => void;
+export type Resolver = { resolve: ResolverFun; promise?: Promise<Action> };
 
 export class SelectActionUsingReact implements Strategy {
   constructor(public setResolver: (resolver: Resolver) => void) {}
@@ -16,8 +17,12 @@ export class SelectActionUsingReact implements Strategy {
     const { promise, resolve } = Promise.withResolvers(
       new Promise<Action>((action) => action),
     );
-    console.log("SelectActionUsingReact.selectAction: promise", promise);
-    this.setResolver(resolve);
+    if (promise === undefined) {
+      throw new Error(
+        "SelectActionUsingReact.selectAction: promise is undefined",
+      );
+    }
+    this.setResolver({ resolve, promise });
     return promise;
   }
 }

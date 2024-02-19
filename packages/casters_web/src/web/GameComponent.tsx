@@ -1,20 +1,30 @@
 import React from "react";
 import { Action } from "./exports";
 import { GameState } from "./GameState";
-import { Resolver } from "./SelectActionUsingReact";
+import { Resolver, ResolverFun } from "./SelectActionUsingReact";
 
-function createButtons(actions: Action[], resolver: (action: Action) => void) {
+function createButtons(actions: Action[], resolver: Resolver) {
   return actions.map((action: Action, index: number) => (
-    <button key={index} onClick={() => resolver(action)}>
-      {action.constructor.name}
+    <button key={index} onClick={() => resolver.resolve(action)}>
+      {action.shortDescription}
     </button>
   ));
 }
 
-export const GameComponent = (gameState: GameState, resolver: Resolver) => {
+type GameComponentProps = {
+  gameState: GameState;
+  resolver: Resolver;
+};
+
+export const GameComponent = ({ gameState, resolver }: GameComponentProps) => {
   return (
     <div>
       <h1>Game</h1>
+      <h2>Props</h2>
+      <ul>
+        <li>gameState: {`${gameState}`}</li>
+        <li>resolver: {`(${resolver.resolve}, {resolver.promise})`}</li>
+      </ul>
       <h2>Available Actions</h2>
       Number of Actions: {gameState.availableActions.length}
       <table>
@@ -27,13 +37,8 @@ export const GameComponent = (gameState: GameState, resolver: Resolver) => {
           ))}
         </tbody>
       </table>
-      <h2>Current Location</h2>
-      Location: {gameState.currentLocation.name}
-      <br />
-      Actions:{" "}
-      {gameState.availableActions.map((action: Action, index: number) => (
-        <div key={index}>{action.constructor.name}</div>
-      ))}
+      <h2>Current Location: {gameState.currentLocation.name}</h2>
+      <p>{gameState.currentLocation.description}</p>
       <h2>Buttons</h2>
       {createButtons(gameState.availableActions, resolver)}
     </div>

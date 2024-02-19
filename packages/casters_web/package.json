@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/hoelzl/Casters#readme",
   "dependencies": {
-    "@types/core-js": "^2.5.8",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "casters_core": "*",
@@ -31,6 +30,7 @@
     "webpack-cli": "^5.1.4"
   },
   "devDependencies": {
+    "@types/core-js": "^2.5.8",
     "html-webpack-plugin": "^5.6.0",
     "webpack-dev-server": "^5.0.2"
   }
