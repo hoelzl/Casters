@@ -1,3 +1,4 @@
+import { Item } from "./item";
 import { World } from "./world";
 import { Location } from "./location";
 
@@ -15,8 +16,9 @@ export type ItemData = {
 
 export type RawLocationData = {
   name: string;
-  description?: string;
   connections?: ConnectionData[];
+  description?: string;
+  imageName?: string;
   items?: ItemData[];
 };
 
@@ -27,8 +29,9 @@ export type RawGameData = {
 
 export type LocationData = {
   name: string;
-  description: string;
   connections: ConnectionData[];
+  description: string;
+  imageName: string;
   items: ItemData[];
 };
 
@@ -43,6 +46,7 @@ function convertRawGameDataToGameData(rawGameData: RawGameData): GameData {
       name: ld.name,
       description: ld.description ?? "",
       connections: ld.connections ?? [],
+      imageName: ld.imageName ?? "default",
       items: ld.items ?? [],
     })),
     initialLocationName:
@@ -55,12 +59,19 @@ export function createGameDataFromString(gameJson: string): GameData {
   return convertRawGameDataToGameData(rawGameData);
 }
 
+function createLocation(ld: LocationData) {
+  const items = ld.items.map((id) => {
+    return new Item(id.kind, id.name ?? "", id.description ?? "");
+  });
+  return new Location(ld["name"], ld["description"], items);
+}
+
 function createLocations(
   locationDescriptions: LocationData[],
 ): Map<string, Location> {
   let locations = new Map<string, Location>();
   for (let ld of locationDescriptions) {
-    locations.set(ld["name"], new Location(ld["name"], ld["description"]));
+    locations.set(ld["name"], createLocation(ld));
   }
   return locations;
 }

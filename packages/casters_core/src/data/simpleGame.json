@@ -19,6 +19,14 @@
           "direction": "south",
           "destination": "Room 1"
         }
+      ],
+      "imageName": "room2",
+      "items": [
+        {
+          "kind": "key",
+          "name": "Shiny Key",
+          "description": "A shiny key"
+        }
       ]
     }
   ]

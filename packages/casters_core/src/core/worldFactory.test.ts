@@ -13,8 +13,8 @@ import * as simpleGameData from "../data/simpleGame.json";
 const minimalGameJsonString: string = `
 {
   "locations": [
-    { "name": "Room 1" },
-    { "name": "Room 2" }
+    { "name": "Room-1" },
+    { "name": "Room-2" }
   ]
 }
 `;
@@ -41,6 +41,14 @@ const simpleGameJsonString: string = `
           "direction": "south",
           "destination": "Room 1"
         }
+      ],
+      "imageName": "room2",
+      "items": [
+        {
+          "kind": "key",
+          "name": "Shiny Key",
+          "description": "A shiny key"
+        }
       ]
     }
   ]
@@ -60,14 +68,14 @@ function checkSingleConnection(
 describe("createGameDataFromString(minimalGameJsonString)", () => {
   test("returns correct initial location", () => {
     const gameData: GameData = createGameDataFromString(minimalGameJsonString);
-    expect(gameData.initialLocationName).toBe("Room 1");
+    expect(gameData.initialLocationName).toBe("Room-1");
   });
 
   test("returns correct location names", () => {
     const gameData: GameData = createGameDataFromString(minimalGameJsonString);
     expect(gameData.locationData.length).toBe(2);
-    expect(gameData.locationData[0].name).toBe("Room 1");
-    expect(gameData.locationData[1].name).toBe("Room 2");
+    expect(gameData.locationData[0].name).toBe("Room-1");
+    expect(gameData.locationData[1].name).toBe("Room-2");
   });
 
   test("handles empty description correctly", () => {
@@ -100,7 +108,7 @@ describe("createGameDataFromString(simpleGameJsonString)", () => {
     expect(gameData.locationData[0].items).toHaveLength(0);
     expect(gameData.locationData[1].name).toBe("Room 2");
     expect(gameData.locationData[1].description).toContain("dark room");
-    expect(gameData.locationData[1].items).toHaveLength(0);
+    expect(gameData.locationData[1].items).toHaveLength(1);
   });
 
   test("returns correct connections for first location", () => {
@@ -127,24 +135,32 @@ function testsForMinimalGame(creator: () => World): () => void {
 
     test("has correct initial location name", () => {
       const world = creator();
-      expect(world.initialLocationName).toBe("Room 1");
+      expect(world.initialLocationName).toBe("Room-1");
     });
 
     test("has correct locations", () => {
       const world = creator();
       expect(world.locationMap.size).toBe(2);
-      let room1 = world.getLocation("Room 1");
+      let room1 = world.getLocation("Room-1");
       expect(room1.description).toBe("");
-      let room2 = world.getLocation("Room 2");
+      let room2 = world.getLocation("Room-2");
       expect(room2.description).toBe("");
     });
 
     test("has correct connections", () => {
       const world = creator();
-      let room1 = world.getLocation("Room 1");
-      let room2 = world.getLocation("Room 2");
+      let room1 = world.getLocation("Room-1");
+      let room2 = world.getLocation("Room-2");
       expect(room1.exits.size).toBe(0);
       expect(room2.exits.size).toBe(0);
+    });
+
+    test("has correct items", () => {
+      const world = creator();
+      let room1 = world.getLocation("Room-1");
+      let room2 = world.getLocation("Room-2");
+      expect(room1.items.length).toBe(0);
+      expect(room2.items.length).toBe(0);
     });
   };
 }
@@ -188,6 +204,18 @@ function testsForSimpleGame(creator: () => World): () => void {
       expect(room1.exits.get("north")).toBe(room2);
       expect(room2.exits.size).toBe(1);
       expect(room2.exits.get("south")).toBe(room1);
+    });
+
+    test("has correct items", () => {
+      const world = creator();
+      let room1 = world.getLocation("Room 1");
+      let room2 = world.getLocation("Room 2");
+      expect(room1.items.length).toBe(0);
+      expect(room2.items.length).toBe(1);
+      let shinyKey = room2.items[0];
+      expect(shinyKey.kind).toBe("key");
+      expect(shinyKey.name).toBe("Shiny Key");
+      expect(shinyKey.description).toBe("A shiny key");
     });
   };
 }
