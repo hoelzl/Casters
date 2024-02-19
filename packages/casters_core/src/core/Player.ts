@@ -1,14 +1,14 @@
-import { Action, ActionTag, getDefaultActions } from "./action";
-import { MoveAction } from "../actions/moveAction";
-import { QuitGameException } from "../actions/quitAction";
+import { Action, ActionTag, getDefaultActions } from "./Action";
+import { MoveAction } from "../actions/MoveAction";
+import { QuitGameException } from "../actions/QuitAction";
 import { registerAllDefaultActions } from "../actions/registerDefaultActions";
-import { SkipTurnAction } from "../actions/skipTurnAction";
+import { SkipTurnAction } from "../actions/SkipTurnAction";
 import config from "./config";
-import { GameObserver } from "./gameObserver";
-import { Location } from "./location";
-import { Pawn } from "./pawn";
-import { PlayerObserver } from "./playerObserver";
-import { Strategy } from "./strategy";
+import { GameObserver } from "./GameObserver";
+import { Location } from "./Location";
+import { Pawn } from "./Pawn";
+import { PlayerObserver } from "./PlayerObserver";
+import { Strategy } from "./Strategy";
 
 registerAllDefaultActions();
 

@@ -1,6 +1,6 @@
 import { describe, expect, test } from "@jest/globals";
-import { QuitAction, QuitGameException } from "./quitAction";
-import { ActionTag } from "../core/action";
+import { QuitAction, QuitGameException } from "./QuitAction";
+import { ActionTag } from "../core/Action";
 import { createPlayer } from "../data/testObjects";
 
 describe("QuitAction", () => {

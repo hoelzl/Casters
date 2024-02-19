@@ -1,10 +1,10 @@
 import { describe, expect, test } from "@jest/globals";
-import { SkipTurnAction } from "../actions/skipTurnAction";
+import { SkipTurnAction } from "../actions/SkipTurnAction";
 import { createPlayer } from "../data/testObjects";
-import { SelectHelpfulAction } from "./selectHelpfulAction";
-import { MoveAction } from "../actions/moveAction";
-import { ActionTag } from "../core/action";
-import { HealAction } from "../actions/healAction";
+import { SelectHelpfulAction } from "./SelectHelpfulAction";
+import { MoveAction } from "../actions/MoveAction";
+import { ActionTag } from "../core/Action";
+import { HealAction } from "../actions/HealAction";
 
 describe("SelectHelpfulAction", () => {
   test("is not interactive", () => {

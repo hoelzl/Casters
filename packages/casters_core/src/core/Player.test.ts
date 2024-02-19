@@ -1,9 +1,9 @@
 import { describe, expect, test } from "@jest/globals";
-import { Action } from "./action";
-import { ErrorAction } from "../actions/errorAction";
-import { MoveAction } from "../actions/moveAction";
-import { QuitAction, QuitGameException } from "../actions/quitAction";
-import { SkipTurnAction } from "../actions/skipTurnAction";
+import { Action } from "./Action";
+import { ErrorAction } from "../actions/ErrorAction";
+import { MoveAction } from "../actions/MoveAction";
+import { QuitAction, QuitGameException } from "../actions/QuitAction";
+import { SkipTurnAction } from "../actions/SkipTurnAction";
 import {
   createPlayer,
   createPlayerAndObserver,

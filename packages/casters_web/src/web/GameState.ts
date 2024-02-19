@@ -1,11 +1,11 @@
-import { Action, ActionTag } from "casters_core/core/action";
-import { Game } from "casters_core/core/game";
+import { Action, ActionTag } from "casters_core/core/Action";
+import { Game } from "casters_core/core/Game";
 import {
   GameObserverBase,
   GameOverReason,
-} from "casters_core/core/gameObserver";
-import { Location } from "casters_core/core/location";
-import { Player } from "casters_core/core/player";
+} from "casters_core/core/GameObserver";
+import { Location } from "casters_core/core/Location";
+import { Player } from "casters_core/core/Player";
 
 export type GameState = {
   currentLocation: Location;

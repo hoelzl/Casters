@@ -1,13 +1,18 @@
-import { Item } from "./item";
+import { Item } from "./Item";
 
 export class Location {
-  constructor(name: string, description: string, items: Item[] = []) {
+  constructor(
+    name: string,
+    description: string,
+    items: Item[] = [],
+    imageName: string = "default",
+  ) {
     this._name = name;
     this._description = description;
     this._exits = new Map<string, Location>();
     this._items = items;
+    this._imageName = imageName;
   }
-
   get name(): string {
     return this._name;
   }
@@ -22,6 +27,10 @@ export class Location {
 
   get items(): Item[] {
     return this._items;
+  }
+
+  get imageName(): string {
+    return this._imageName;
   }
 
   getExit(name: string): Location {
@@ -49,4 +58,5 @@ export class Location {
   private readonly _description: string;
   private readonly _exits: Map<string, Location>;
   private _items: Item[];
+  private readonly _imageName: string;
 }

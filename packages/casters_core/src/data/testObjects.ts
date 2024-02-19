@@ -1,13 +1,13 @@
-import { Action } from "../core/action";
-import { SkipTurnAction } from "../actions/skipTurnAction";
+import { Action } from "../core/Action";
+import { SkipTurnAction } from "../actions/SkipTurnAction";
 import * as simpleGameData from "./simpleGame.json";
-import { Game } from "../core/game";
-import { GameObserver, GameOverReason } from "../core/gameObserver";
-import { Player } from "../core/player";
-import { Result } from "../core/result";
-import { SkipTurnStrategy } from "../strategies/skipTurnStrategy";
-import { Strategy } from "../core/strategy";
-import { World } from "../core/world";
+import { Game } from "../core/Game";
+import { GameObserver, GameOverReason } from "../core/GameObserver";
+import { Player } from "../core/Player";
+import { Result } from "../core/Result";
+import { SkipTurnStrategy } from "../strategies/SkipTurnStrategy";
+import { Strategy } from "../core/Strategy";
+import { World } from "../core/World";
 import { createWorldFromJsonData } from "../core/worldFactory";
 
 type WorldAndPlayerParams = {

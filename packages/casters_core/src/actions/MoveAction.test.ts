@@ -1,6 +1,6 @@
 import { describe, expect, test } from "@jest/globals";
-import { MoveAction } from "./moveAction";
-import { ActionTag } from "../core/action";
+import { MoveAction } from "./MoveAction";
+import { ActionTag } from "../core/Action";
 import { createPlayer } from "../data/testObjects";
 
 describe("MoveAction", () => {

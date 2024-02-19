@@ -1,5 +1,5 @@
-import { Action, ActionTag } from "../core/action";
-import { Player } from "../core/player";
+import { Action, ActionTag } from "../core/Action";
+import { Player } from "../core/Player";
 
 export class QuitGameException extends Error {
   constructor(public message: string = "Game quit by player.") {

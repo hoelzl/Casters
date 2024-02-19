@@ -1,6 +1,6 @@
 import { describe, expect, test } from "@jest/globals";
-import { SkipTurnAction } from "./skipTurnAction";
-import { ActionTag } from "../core/action";
+import { SkipTurnAction } from "./SkipTurnAction";
+import { ActionTag } from "../core/Action";
 import { createPlayer } from "../data/testObjects";
 
 describe("SkipTurnAction", () => {

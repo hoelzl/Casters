@@ -1,14 +1,14 @@
-import { GameObserver, GameOverReason } from "./gameObserver";
-import { World } from "./world";
+import { GameObserver, GameOverReason } from "./GameObserver";
+import { World } from "./World";
 import {
   createWorldFromJsonData,
   createWorldFromString,
   RawGameData,
 } from "./worldFactory";
-import { Strategy } from "./strategy";
-import { Player } from "./player";
-import { GameInProgress, Result } from "./result";
-import { QuitGameException } from "../actions/quitAction";
+import { Strategy } from "./Strategy";
+import { Player } from "./Player";
+import { GameInProgress, Result } from "./Result";
+import { QuitGameException } from "../actions/QuitAction";
 
 export class Game {
   constructor(gameData: string | RawGameData, observer?: GameObserver) {

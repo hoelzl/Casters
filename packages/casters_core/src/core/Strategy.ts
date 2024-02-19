@@ -1,5 +1,5 @@
-import { Action } from "./action";
-import { Player } from "./player";
+import { Action } from "./Action";
+import { Player } from "./Player";
 
 export interface Strategy {
   selectAction(player: Player, actions: Action[]): Promise<Action>;

@@ -1,7 +1,7 @@
 import select from "@inquirer/select";
-import { Action } from "casters_core/core/action";
-import { Player } from "casters_core/core/player";
-import { Strategy } from "casters_core/core/strategy";
+import { Action } from "casters_core/core/Action";
+import { Player } from "casters_core/core/Player";
+import { Strategy } from "casters_core/core/Strategy";
 
 // noinspection JSUnusedGlobalSymbols
 export class SelectActionInteractively implements Strategy {

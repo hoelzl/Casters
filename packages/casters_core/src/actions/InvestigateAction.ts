@@ -1,5 +1,5 @@
-import { Action, ActionTag } from "../core/action";
-import { Player } from "../core/player";
+import { Action, ActionTag } from "../core/Action";
+import { Player } from "../core/Player";
 
 export class InvestigateAction implements Action {
   get description(): string {

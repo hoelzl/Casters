@@ -1,8 +1,8 @@
-import { ActionType, registerDefaultAction } from "../core/action";
-import { ErrorAction } from "./errorAction";
-import { InvestigateAction } from "./investigateAction";
-import { QuitAction } from "./quitAction";
-import { SkipTurnAction } from "./skipTurnAction";
+import { ActionType, registerDefaultAction } from "../core/Action";
+import { ErrorAction } from "./ErrorAction";
+import { InvestigateAction } from "./InvestigateAction";
+import { QuitAction } from "./QuitAction";
+import { SkipTurnAction } from "./SkipTurnAction";
 
 const allDefaultActionTypes: ActionType[] = [
   InvestigateAction,

@@ -6,7 +6,7 @@ import {
   createWorldFromJsonData,
 } from "./worldFactory";
 import { describe, expect, test } from "@jest/globals";
-import { World } from "./world";
+import { World } from "./World";
 import * as minimalGameData from "../data/minimalGame.json";
 import * as simpleGameData from "../data/simpleGame.json";
 

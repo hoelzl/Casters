@@ -1,9 +1,9 @@
-import { Action } from "casters_core/core/action";
-import { MoveAction } from "casters_core/actions/moveAction";
-import { Game } from "casters_core/core/game";
-import { GameObserver, GameOverReason } from "casters_core/core/gameObserver";
-import { Player } from "casters_core/core/player";
-import { Result } from "casters_core/core/result";
+import { Action } from "casters_core/core/Action";
+import { MoveAction } from "casters_core/actions/MoveAction";
+import { Game } from "casters_core/core/Game";
+import { GameObserver, GameOverReason } from "casters_core/core/GameObserver";
+import { Player } from "casters_core/core/Player";
+import { Result } from "casters_core/core/Result";
 import { wrapText } from "casters_core/core/utils";
 
 export class PrintingDebugObserver implements GameObserver {

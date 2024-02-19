@@ -1,6 +1,6 @@
-import { Item } from "./item";
-import { World } from "./world";
-import { Location } from "./location";
+import { Item } from "./Item";
+import { World } from "./World";
+import { Location } from "./Location";
 
 export type ConnectionData = {
   direction: string;

@@ -1,6 +1,6 @@
 import { describe, expect, test } from "@jest/globals";
-import { ErrorAction } from "./errorAction";
-import { ActionTag } from "../core/action";
+import { ErrorAction } from "./ErrorAction";
+import { ActionTag } from "../core/Action";
 import { createPlayer } from "../data/testObjects";
 
 describe("ErrorAction", () => {

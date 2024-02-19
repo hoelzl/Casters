@@ -1,7 +1,7 @@
-import { Strategy } from "../core/strategy";
-import { Player } from "../core/player";
-import { Action } from "../core/action";
-import { SkipTurnAction } from "../actions/skipTurnAction";
+import { Strategy } from "../core/Strategy";
+import { Player } from "../core/Player";
+import { Action } from "../core/Action";
+import { SkipTurnAction } from "../actions/SkipTurnAction";
 
 export class SkipTurnStrategy implements Strategy {
   get isInteractive(): boolean {

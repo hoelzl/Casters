@@ -1,8 +1,8 @@
-import { Action } from "./action";
-import { Player } from "./player";
-import { Result } from "./result";
-import { Game } from "./game";
-import { PlayerObserver } from "./playerObserver";
+import { Action } from "./Action";
+import { Player } from "./Player";
+import { Result } from "./Result";
+import { Game } from "./Game";
+import { PlayerObserver } from "./PlayerObserver";
 
 // noinspection JSUnusedGlobalSymbols
 export enum GameOverReason {

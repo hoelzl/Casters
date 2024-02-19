@@ -1,7 +1,7 @@
 import { describe, expect, test } from "@jest/globals";
-import { SkipTurnAction } from "../actions/skipTurnAction";
+import { SkipTurnAction } from "../actions/SkipTurnAction";
 import { createPlayer } from "../data/testObjects";
-import { SkipTurnStrategy } from "./skipTurnStrategy";
+import { SkipTurnStrategy } from "./SkipTurnStrategy";
 
 describe("SkipTurnStrategy", () => {
   test("is not interactive", () => {

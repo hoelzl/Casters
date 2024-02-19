@@ -1,7 +1,7 @@
-import { Action } from "../core/action";
-import { SkipTurnAction } from "../actions/skipTurnAction";
-import { Player } from "../core/player";
-import { Strategy } from "../core/strategy";
+import { Action } from "../core/Action";
+import { SkipTurnAction } from "../actions/SkipTurnAction";
+import { Player } from "../core/Player";
+import { Strategy } from "../core/Strategy";
 import { getRandomElement } from "../core/utils";
 
 export abstract class SelectActionWithProperty implements Strategy {

@@ -1,10 +1,10 @@
 import { describe, expect, test } from "@jest/globals";
-import { SkipTurnAction } from "../actions/skipTurnAction";
+import { SkipTurnAction } from "../actions/SkipTurnAction";
 import { createPlayer } from "../data/testObjects";
-import { SelectAggressiveAction } from "./selectAggressiveAction";
-import { MoveAction } from "../actions/moveAction";
-import { InvestigateAction } from "../actions/investigateAction";
-import { ActionTag } from "../core/action";
+import { SelectAggressiveAction } from "./SelectAggressiveAction";
+import { MoveAction } from "../actions/MoveAction";
+import { InvestigateAction } from "../actions/InvestigateAction";
+import { ActionTag } from "../core/Action";
 
 describe("SelectAggressiveAction", () => {
   test("is not interactive", () => {

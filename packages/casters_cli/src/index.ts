@@ -1,7 +1,7 @@
-import { Game } from "casters_core/core/game";
-import { Player } from "casters_core/core/player";
-import { PrintingObserver } from "./cli/printingObserver";
-import { SelectActionInteractively } from "./cli/selectActionInteractively";
+import { Game } from "casters_core/core/Game";
+import { Player } from "casters_core/core/Player";
+import { PrintingObserver } from "./cli/PrintingObserver";
+import { SelectActionInteractively } from "./cli/SelectActionInteractively";
 import * as gameData from "casters_core/data/dungeon.json";
 
 async function runGame() {

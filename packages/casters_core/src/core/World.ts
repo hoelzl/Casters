@@ -1,4 +1,4 @@
-import { Location } from "./location";
+import { Location } from "./Location";
 
 export class World {
   constructor(initialLocationName: string, locations: Map<string, Location>) {
