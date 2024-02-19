@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "packages": [
+    "packages/caster_core",
+    "packages/caster_cli",
+    "packages/caster_web"
+  ],
+  "version": "0.1.0"
+}

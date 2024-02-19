@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json", // Adjust the path as necessary to point to your root tsconfig.json
+  "compilerOptions": {
+    "baseUrl": "."
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.json"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "tsconfig.json"
+  ]
+}

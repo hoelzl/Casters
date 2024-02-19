@@ -1,0 +1,31 @@
+{
+  "name": "casters_core",
+  "version": "0.1.0",
+  "description": "Clean Architecture for Software in TypeScript, Exploring Responsibility-driven design and SOLID",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "npx tsc-watch --onSuccess \\\"node dist/index.js\\\"",
+    "test": "npx jest",
+    "test:watch": "npx jest --watch",
+    "watch": "npx tsc-watch"
+  },
+  "private": true,
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "ts-loader": "^9.5.1",
+    "tsc-watch": "^6.0.4",
+    "typescript": "^5.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoelzl/Casters.git"
+  },
+  "author": "Matthias Hölzl <tc@xantira.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hoelzl/Casters/issues"
+  },
+  "homepage": "https://github.com/hoelzl/Casters#readme"
+}
