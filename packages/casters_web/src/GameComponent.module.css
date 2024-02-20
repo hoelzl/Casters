@@ -6,15 +6,36 @@ body, html {
 }
 
 @font-face {
-    font-family: 'Merriweather';
-    src: url('./fonts/Merriweather-Bold.ttf') format('ttf');
+    font-family: 'Merriweather Bold';
+    src: url('./fonts/Merriweather-Bold.ttf') format('opentype');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Lato';
-    src: url('./fonts/Lato-Regular.ttf') format('ttf');
+    font-family: 'Lato Regular';
+    src: url('./fonts/Lato-Regular.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lato Black';
+    src: url('./fonts/Lato-Black.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lato Bold';
+    src: url('./fonts/Lato-Bold.ttf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lato Light';
+    src: url('./fonts/Lato-Light.ttf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
@@ -53,7 +74,7 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "Lato", serif;
+    font-family: "Merriweather Bold", serif;
     font-size: 18px;
 }
 
@@ -64,7 +85,7 @@ body, html {
 }
 
 .descriptionText {
-    font-family: "Lato", sans-serif;
+    font-family: "Lato Regular", sans-serif;
     font-size: 18px;
     line-height: 1.4;
     margin: 10px 20px;
@@ -99,7 +120,7 @@ body, html {
 
 .movementActions.directionButton {
     justify-content: center;
-    font-family: "Lato", sans-serif;
+    font-family: "Lato Black", sans-serif;
     font-size: 12px;
 }
 

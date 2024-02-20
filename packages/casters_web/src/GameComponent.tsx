@@ -12,7 +12,7 @@ const mixedStyles = {
 
 function createButtons(actions: Action[], resolver: Resolver) {
   if (actions.length === 0) {
-    return [<p>No more actions are available.</p>];
+    return [<p className={styles.overlay}>No more actions are available.</p>];
   }
   return actions.map((action: Action, index: number) => {
     let className = styles.button;
