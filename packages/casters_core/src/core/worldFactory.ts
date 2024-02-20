@@ -63,7 +63,7 @@ function createLocation(ld: LocationData) {
   const items = ld.items.map((id) => {
     return new Item(id.kind, id.name ?? "", id.description ?? "");
   });
-  return new Location(ld["name"], ld["description"], items);
+  return new Location(ld.name, ld.description, items, ld.imageName);
 }
 
 function createLocations(
@@ -71,7 +71,7 @@ function createLocations(
 ): Map<string, Location> {
   let locations = new Map<string, Location>();
   for (let ld of locationDescriptions) {
-    locations.set(ld["name"], createLocation(ld));
+    locations.set(ld.name, createLocation(ld));
   }
   return locations;
 }
@@ -83,7 +83,7 @@ function updateLocationExits(
   for (let ld of locationData) {
     let location = locations.get(ld["name"]);
     if (!location) {
-      throw new Error(`Location ${ld["name"]} not found`);
+      throw new Error(`Location ${ld.name} not found`);
     }
     for (let { direction, destination } of ld["connections"]) {
       let destLoc = locations.get(destination);

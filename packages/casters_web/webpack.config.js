@@ -2,10 +2,11 @@
 const path = require("path");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   mode: "development", // or 'production'
-  entry: "./src/web/App.tsx",
+  entry: "./src/App.tsx",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
@@ -16,6 +17,10 @@ module.exports = {
         test: /\.tsx?$/,
         use: "ts-loader",
         exclude: /node_modules/,
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif|webp)$/i,
+        type: "asset/resource",
       },
     ],
   },
@@ -28,7 +33,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/web/index.html",
+      template: "./src/index.html",
+    }),
+    new CopyPlugin({
+      patterns: [{ from: "assets", to: "assets" }],
     }),
   ],
   devServer: {

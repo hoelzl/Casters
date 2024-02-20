@@ -19,14 +19,18 @@ type GameComponentProps = {
   resolver: Resolver;
 };
 
+function imageLocation(imageName: string) {
+  return `./assets/images/${imageName}.webp`;
+}
+
 export const GameComponent = ({ gameState, resolver }: GameComponentProps) => {
   return (
     <div>
       <h1>Casters RPG</h1>
-      <h2>Current Location: {gameState.currentLocation.name}</h2>
       <img
-        src={`img/${gameState.currentLocation.imageName}.webp`}
+        src={imageLocation(gameState.currentLocation.imageName)}
         alt={gameState.currentLocation.name}
+        style={{ width: "50%" }}
       />
       <p>{gameState.currentLocation.description}</p>
       <h2>Actions</h2>
