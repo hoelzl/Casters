@@ -1,6 +1,5 @@
 import React from "react";
-import { Action, MoveAction } from "./exports";
-// @ts-ignore
+import { Action, capitalizeFirstLetter, MoveAction } from "./exports"; // @ts-ignore
 import styles from "./GameComponent.module.css";
 import { GameState, movementActions, nonMovementActions } from "./GameState";
 import { Resolver } from "./SelectActionUsingReact";
@@ -15,25 +14,22 @@ function createButtons(actions: Action[], resolver: Resolver) {
     return [<p>No more actions are available.</p>];
   }
   return actions.map((action: Action, index: number) => {
-    let button: JSX.Element;
+    let className = styles.button;
+    let title = action.shortDescription;
     if (action instanceof MoveAction) {
-      button = (
-        <button
-          key={index}
-          onClick={() => resolver.resolve(action)}
-          className={styles.directionButton + " " + styles[action.direction]}
-        >
-          {action.shortDescription}
-        </button>
-      );
-    } else {
-      button = (
-        <button key={index} onClick={() => resolver.resolve(action)}>
-          {action.shortDescription}
-        </button>
-      );
+      className +=
+        " " + styles.directionButton + " " + styles[action.direction];
+      title = `${capitalizeFirstLetter(action.direction)}`;
     }
-    return button;
+    return (
+      <button
+        key={index}
+        onClick={() => resolver.resolve(action)}
+        className={className}
+      >
+        {title}
+      </button>
+    );
   });
 }
 
