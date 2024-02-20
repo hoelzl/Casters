@@ -75,6 +75,19 @@ body, html {
 
 .movementActions {
     display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2px;
+    justify-items: center;
+    align-items: center;
+    place-items: center;
+    width: 200px; /* Or fixed width, if preferred */
+    height: 200px; /* Or fixed height, to maintain button alignment */
+}
+
+
+.movementActions {
+    display: grid;
     grid-template-columns: repeat(3, 1fr); /* 1fr for equal column sizes */
     grid-template-rows: repeat(3, auto); /* Define rows for better control */
     place-items: center; /* Center items in their grid cell */
@@ -115,6 +128,7 @@ body, html {
     grid-row: 2;
 }
 
+
 .otherActions {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -138,4 +152,8 @@ body, html {
     padding: 4px;
     border-image: url('./ui/borders/panel-transparent-border-000.png') 30 round;
     /* Additional button styling */
+}
+
+.hidden {
+    visibility: hidden;
 }

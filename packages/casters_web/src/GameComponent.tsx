@@ -16,11 +16,6 @@ function createButtons(actions: Action[], resolver: Resolver) {
   return actions.map((action: Action, index: number) => {
     let className = styles.button;
     let title = action.shortDescription;
-    if (action instanceof MoveAction) {
-      className +=
-        " " + styles.directionButton + " " + styles[action.direction];
-      title = `${capitalizeFirstLetter(action.direction)}`;
-    }
     return (
       <button
         key={index}
@@ -30,6 +25,41 @@ function createButtons(actions: Action[], resolver: Resolver) {
         {title}
       </button>
     );
+  });
+}
+
+function createMovementButton(
+  key: number,
+  direction: string,
+  action: MoveAction | undefined,
+  resolver: Resolver,
+  hidden: boolean,
+) {
+  let props: any = {
+    key: key,
+    className: `${styles.button} ${styles.directionButton} ${styles[direction]}`,
+    disabled: hidden,
+  };
+  if (!hidden && action !== undefined) {
+    props.onClick = () => resolver.resolve(action);
+  } else {
+    props.className += ` ${styles.hidden}`;
+  }
+
+  return <button {...props}>{capitalizeFirstLetter(direction)}</button>;
+}
+
+const compassDirections = ["north", "south", "east", "west"];
+
+function createMovementButtons(
+  actions: MoveAction[],
+  resolver: Resolver,
+  directions: string[] = compassDirections,
+) {
+  return directions.map((direction, index) => {
+    const action = actions.find((a) => a.direction === direction);
+    const hidden = action === undefined;
+    return createMovementButton(index, direction, action, resolver, hidden);
   });
 }
 
@@ -58,7 +88,7 @@ export const GameComponent = ({ gameState, resolver }: GameComponentProps) => {
       </div>
       <div className={styles.actionsContainer}>
         <div className={styles.movementActions}>
-          {createButtons(movementActions(gameState), resolver).map(
+          {createMovementButtons(movementActions(gameState), resolver).map(
             (button, index) => (
               <div key={index} className={button.props.className}>
                 {button}
