@@ -1,3 +1,4 @@
+import config from "./config";
 import { GameObserver, GameOverReason } from "./GameObserver";
 import { World } from "./World";
 import {
@@ -65,7 +66,7 @@ export class Game {
     try {
       this.notifyGameStarted();
       for (let player of this._players) {
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < config.maxNumTurns; i++) {
           this.notifyTurnStarted(player);
           await player.takeTurn();
         }

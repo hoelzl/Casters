@@ -5,8 +5,9 @@ import { GameState, movementActions, nonMovementActions } from "./GameState";
 import { Resolver } from "./SelectActionUsingReact";
 
 const mixedStyles = {
-  topOverlay: styles.overlay + " " + styles.topOverlay,
-  bottomOverlay: styles.overlay + " " + styles.bottomOverlay,
+  topOverlay: styles.fullWidth + " " + styles.overlay + " " + styles.topOverlay,
+  bottomContent: styles.fullWidth + " " + styles.bottomContent,
+  descriptionBox: styles.overlay + " " + styles.descriptionBox,
 };
 
 function createButtons(actions: Action[], resolver: Resolver) {
@@ -43,7 +44,7 @@ function createMovementButton(
   if (!hidden && action !== undefined) {
     props.onClick = () => resolver.resolve(action);
   } else {
-    props.className += ` ${styles.hidden}`;
+    props.className += ` ${styles.disabled}`;
   }
 
   return <button {...props}>{capitalizeFirstLetter(direction)}</button>;
@@ -83,18 +84,14 @@ export const GameComponent = ({ gameState, resolver }: GameComponentProps) => {
       <div className={mixedStyles.topOverlay}>
         <h1>{gameState.currentLocation.name}</h1>
       </div>
-      <div className={mixedStyles.bottomOverlay}>
-        <p>{gameState.currentLocation.description}</p>
-      </div>
-      <div className={styles.actionsContainer}>
+      <div className={mixedStyles.bottomContent}>
         <div className={styles.movementActions}>
-          {createMovementButtons(movementActions(gameState), resolver).map(
-            (button, index) => (
-              <div key={index} className={button.props.className}>
-                {button}
-              </div>
-            ),
-          )}
+          {createMovementButtons(movementActions(gameState), resolver)}
+        </div>
+        <div className={mixedStyles.descriptionBox}>
+          <p className={styles.descriptionText}>
+            {gameState.currentLocation.description}
+          </p>
         </div>
         <div className={styles.otherActions}>
           {createButtons(nonMovementActions(gameState), resolver)}

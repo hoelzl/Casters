@@ -4,6 +4,7 @@ body, html {
     width: 100%;
     height: 100%;
 }
+
 @font-face {
     font-family: 'Merriweather';
     src: url('./fonts/Merriweather-Bold.ttf') format('ttf');
@@ -35,70 +36,69 @@ body, html {
     z-index: -1;
 }
 
-.overlay {
-    position: absolute;
+.fullWidth {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
+}
+
+.overlay {
     color: white;
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
 }
 
 .topOverlay {
     top: 0;
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "Merriweather", serif;
+    font-family: "Lato", serif;
     font-size: 18px;
 }
 
-.bottomOverlay {
-    bottom: 0;
-    width: 40%; /* or 50%, depending on your preference */
-    left: 50%;
-    transform: translateX(-50%); /* Center the overlay horizontally */
+.descriptionBox {
+    grid-column: 2;
+    min-height: 200px;
+    backdrop-filter: blur(5px) saturate(60%);
+}
+
+.descriptionText {
     font-family: "Lato", sans-serif;
     font-size: 18px;
     line-height: 1.4;
+    margin: 10px 20px;
 }
 
-.actionsContainer {
+.bottomContent {
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    column-gap: 20px;
+    justify-content: center;
+    place-items: center;
+    align-items: end;
+    width: 100%;
+    bottom: 2%;
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 10%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 10%; /* Adjust padding as needed */
+    padding: 0 30px; /* Compensate for the column gap */
 }
+
 
 .movementActions {
+    grid-column: 1;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
+    min-height: 200px;
+    max-width: 300px;
     gap: 2px;
-    justify-items: center;
-    align-items: center;
     place-items: center;
-    width: 200px; /* Or fixed width, if preferred */
-    height: 200px; /* Or fixed height, to maintain button alignment */
+    /*background: darkred;*/
 }
 
-
-.movementActions {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 1fr for equal column sizes */
-    grid-template-rows: repeat(3, auto); /* Define rows for better control */
-    place-items: center; /* Center items in their grid cell */
-}
 
 .movementActions.directionButton {
-    width: 100px;
-    height: 40px;
-    display: flex;
     justify-content: center;
-    align-items: center;
     font-family: "Lato", sans-serif;
     font-size: 12px;
 }
@@ -130,30 +130,51 @@ body, html {
 
 
 .otherActions {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 10px;
-    align-items: start;
-    /* Styling for non-movement actions */
+    grid-column: 3;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: stretch;
+    align-content: stretch;
+    min-height: 200px;
+    /*background: gold;*/
+    width: 80%;
 }
 
 .otherActions .button {
-    width: 100px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Lato", sans-serif;
-    font-size: 12px;
+    min-width: 80px;
+    max-width: 400px;
+    height: auto; /* Adjust based on content */
 }
 
 .button {
     border: 10px solid transparent;
+    background-color: transparent;
+    background-repeat: no-repeat;
     padding: 4px;
-    border-image: url('./ui/borders/panel-transparent-border-000.png') 30 round;
-    /* Additional button styling */
+    border-image: url('./ui/borders/panel-transparent-border-000.png') 30 fill;
+    filter: opacity(0.85);
+}
+
+.button:hover {
+    border-image: url('./ui/borders/panel-transparent-border-001.png') 30 fill;
+    filter: opacity(1.0);
+}
+
+.button:active {
+    border-image: url('./ui/borders/panel-transparent-border-002.png') 30 fill;
+}
+
+.button:disabled {
+    border-image: url('./ui/borders/panel-transparent-border-003.png') 30 fill;
 }
 
 .hidden {
     visibility: hidden;
+}
+
+.disabled {
+    pointer-events: none;
+    filter: brightness(40%);
 }
