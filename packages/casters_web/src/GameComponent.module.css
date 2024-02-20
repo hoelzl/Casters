@@ -1,0 +1,104 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.gameContainer {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.backgroundImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+}
+
+.topOverlay {
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottomOverlay {
+    bottom: 0;
+    width: 30%; /* or 50%, depending on your preference */
+    left: 50%;
+    transform: translateX(-50%); /* Center the overlay horizontally */
+}
+
+.actionsContainer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10%; /* Adjust padding as needed */
+}
+
+.movementActions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 1fr for equal column sizes */
+    grid-template-rows: repeat(3, auto); /* Define rows for better control */
+    place-items: center; /* Center items in their grid cell */
+}
+
+.movementActions.directionButton {
+    width: 100px; /* Example fixed width */
+    height: 40px; /* Example fixed height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.north{}
+.south{}
+.west{}
+.east{}
+
+.directionButton.north {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.directionButton.south {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+.directionButton.west {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.directionButton.east {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+
+.otherActions {
+    display: grid;
+    grid-template-rows: repeat(auto-fill, minmax(50px, auto));
+    gap: 10px;
+    /* Styling for non-movement actions */
+}

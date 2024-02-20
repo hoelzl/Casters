@@ -12,6 +12,18 @@ export type GameState = {
   availableActions: Action[];
 };
 
+export function movementActions(GameState: GameState) {
+  return GameState.availableActions.filter((action) =>
+    action.tags.has(ActionTag.Movement),
+  );
+}
+
+export function nonMovementActions(GameState: GameState) {
+  return GameState.availableActions.filter(
+    (action) => !action.tags.has(ActionTag.Movement),
+  );
+}
+
 export class UpdateStateObserver extends GameObserverBase {
   constructor(state: GameState) {
     super();
