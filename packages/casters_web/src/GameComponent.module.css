@@ -4,6 +4,19 @@ body, html {
     width: 100%;
     height: 100%;
 }
+@font-face {
+    font-family: 'Merriweather';
+    src: url('./fonts/Merriweather-Bold.ttf') format('ttf');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: url('./fonts/Lato-Regular.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
 
 .gameContainer {
     position: relative;
@@ -36,13 +49,18 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: "Merriweather", serif;
+    font-size: 18px;
 }
 
 .bottomOverlay {
     bottom: 0;
-    width: 30%; /* or 50%, depending on your preference */
+    width: 40%; /* or 50%, depending on your preference */
     left: 50%;
     transform: translateX(-50%); /* Center the overlay horizontally */
+    font-family: "Lato", sans-serif;
+    font-size: 18px;
+    line-height: 1.4;
 }
 
 .actionsContainer {
@@ -63,8 +81,8 @@ body, html {
 }
 
 .movementActions.directionButton {
-    width: 100px; /* Example fixed width */
-    height: 40px; /* Example fixed height */
+    width: 100px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -98,7 +116,14 @@ body, html {
 
 .otherActions {
     display: grid;
-    grid-template-rows: repeat(auto-fill, minmax(50px, auto));
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 10px;
+    align-items: start;
     /* Styling for non-movement actions */
+}
+
+.otherActions .button {
+    width: 100%;
+    height: 50px;
+    /* Apply the 9-slice styling here if desired */
 }
