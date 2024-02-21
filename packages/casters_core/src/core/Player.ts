@@ -15,13 +15,13 @@ registerAllDefaultActions();
 export class Player {
   private _pawn: Pawn;
   private _observers: PlayerObserver[] = [];
+  private _strategy: Strategy;
+  private _actions: Action[] = [];
 
   constructor(name: string, location: Location, strategy: Strategy) {
     this._pawn = new Pawn(name, location);
     this._strategy = strategy;
   }
-
-  private _strategy: Strategy;
 
   get strategy(): Strategy {
     return this._strategy;
@@ -30,6 +30,25 @@ export class Player {
   // noinspection JSUnusedGlobalSymbols
   set strategy(strategy: Strategy) {
     this._strategy = strategy;
+  }
+
+  get actions(): Action[] {
+    return this._actions;
+  }
+
+  set actions(actions: Action[]) {
+    this._actions = actions;
+    this.notePossibleActions(actions);
+  }
+
+  addActions(actions: Action[]): void {
+    this._actions = this._actions.concat(actions);
+    this.notePossibleActions(this._actions);
+  }
+
+  addAction(action: Action): void {
+    this._actions.push(action);
+    this.notePossibleActions(this._actions);
   }
 
   get name(): string {
@@ -71,7 +90,7 @@ export class Player {
         this.getInteractiveDefaultActions(addTestOnlyActions),
       );
     }
-    this.notePossibleActions(result);
+    this.actions = result;
     return result;
   }
 
@@ -123,6 +142,12 @@ export class Player {
 
   registerObserver(observer: GameObserver): void {
     this._observers.push(observer);
+  }
+
+  public notify(message: string): void {
+    for (let observer of this._observers) {
+      observer.notify(this, message);
+    }
   }
 
   private notePossibleActions(actions: Action[]): void {

@@ -4,7 +4,6 @@ import { Resolver } from "../SelectActionUsingReact";
 import styles from "./Casters.module.css";
 
 type MovementButtonProps = {
-  key: number;
   direction: string;
   action: MoveAction | undefined;
   resolver: Resolver;
@@ -12,14 +11,12 @@ type MovementButtonProps = {
 };
 
 export function MovementButton({
-  key,
   direction,
   action,
   resolver,
   hidden,
 }: MovementButtonProps) {
   let props: any = {
-    key: key,
     className: `${styles.button} ${styles.directionButton} ${styles[direction]}`,
     disabled: hidden,
   };
@@ -28,6 +25,5 @@ export function MovementButton({
   } else {
     props.className += ` ${styles.disabled}`;
   }
-
   return <button {...props}>{capitalizeFirstLetter(direction)}</button>;
 }

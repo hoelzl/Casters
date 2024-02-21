@@ -12,7 +12,7 @@ export class SelectActionUsingReact implements Strategy {
   }
 
   async selectAction(_player: Player, _actions: Action[]): Promise<Action> {
-    console.log("SelectActionUsingReact.selectAction");
+    // console.log("SelectActionUsingReact.selectAction");
     // @ts-ignore
     const { promise, resolve } = Promise.withResolvers(
       new Promise<Action>((action) => action),

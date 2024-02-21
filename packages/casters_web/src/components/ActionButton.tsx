@@ -2,22 +2,19 @@ import React from "react";
 import { Action } from "../exports";
 import { Resolver } from "../SelectActionUsingReact";
 import styles from "./Casters.module.css";
+import { v4 as uuidv4 } from "uuid";
 
 type ActionButtonProps = {
   action: Action;
-  index: number;
   resolver: Resolver;
 };
 
-export function ActionButton({ action, index, resolver }: ActionButtonProps) {
-  let className = styles.button;
-  let title = action.shortDescription;
+export function ActionButton({ action, resolver }: ActionButtonProps) {
+  const className = styles.button;
+  const title = action.shortDescription;
+
   return (
-    <button
-      key={index}
-      onClick={() => resolver.resolve(action)}
-      className={className}
-    >
+    <button onClick={() => resolver.resolve(action)} className={className}>
       {title}
     </button>
   );

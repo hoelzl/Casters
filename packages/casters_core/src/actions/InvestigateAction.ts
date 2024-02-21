@@ -14,7 +14,17 @@ export class InvestigateAction implements Action {
     return new Set([ActionTag.Investigation, ActionTag.Aggressive]);
   }
 
-  async perform(_player: Player): Promise<void> {
-    throw new Error("Not implemented.");
+  async perform(player: Player): Promise<void> {
+    console.log("InvestigateAction.perform()");
+    let msg = "You investigate the area.\n";
+    const items = player.location.items;
+    if (items.length === 0) {
+      msg += "\nYou find nothing of interest.";
+    } else {
+      for (let item of items) {
+        msg += `\n- You find a ${item.name}.`;
+      }
+    }
+    player.notify(msg);
   }
 }

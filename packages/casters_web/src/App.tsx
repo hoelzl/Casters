@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Game, gameData, Location, Player } from "./exports";
 import { GameComponent } from "./components/GameComponent";
-import { GameState, UpdateStateObserver } from "./GameState";
+import { GameState } from "./GameState";
 import { Resolver, SelectActionUsingReact } from "./SelectActionUsingReact";
+import { UpdateStateObserver } from "./UpdateStateObserver";
 
 const initialState: GameState = {
   currentLocation: new Location("Invalid Location", ""),
@@ -43,7 +44,6 @@ function createAndConfigureObserver(
   const observer = new UpdateStateObserver(gameState);
   game.registerObserver(observer);
   const updateGameStateFromObserver = () => {
-    console.log("GameStateProvider.updateGameStateFromObserver()");
     setGameState({ ...observer.state });
   };
   observer.onStateChange = updateGameStateFromObserver;
@@ -56,8 +56,6 @@ const App = () => {
     resolve: () => {},
   });
 
-  const [game] = createAndConfigureGameAndPlayer(setResolver);
-  createAndConfigureObserver(game, gameState, setGameState);
   let result = (
     <div>
       <h1>Initialization Failed!</h1>
@@ -68,6 +66,8 @@ const App = () => {
   );
 
   useEffect(() => {
+    const [game] = createAndConfigureGameAndPlayer(setResolver);
+    createAndConfigureObserver(game, gameState, setGameState);
     game.run().catch((error: any) => {
       result = (
         <div>
@@ -77,6 +77,10 @@ const App = () => {
       );
     });
   }, []);
+
+  // useEffect(() => {
+  //   console.log("gameState updated:", gameState.notifications);
+  // }, [gameState.notifications]);
 
   result = <GameComponent gameState={gameState} resolver={resolver} />;
   return result;

@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 import { GameState, nonMovementActions } from "../GameState";
 import { Resolver } from "../SelectActionUsingReact";
 import { ActionButton } from "./ActionButton";
@@ -18,8 +19,12 @@ export function ActionButtons({ gameState, resolver }: ActionButtonsProps) {
       </p>
     ) : (
       actions.map((action, index) => (
-        <ActionButton action={action} index={index} resolver={resolver} />
+        <ActionButton key={index} action={action} resolver={resolver} />
       ))
     );
-  return <div className={styles.otherActions}>{children}</div>;
+  return (
+    <div key={uuidv4()} className={styles.otherActions}>
+      {children}
+    </div>
+  );
 }

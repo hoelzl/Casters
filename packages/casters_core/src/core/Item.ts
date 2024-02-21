@@ -10,7 +10,11 @@ export class Item {
   }
 
   get name(): string {
-    return this._name;
+    if (this._name) {
+      return this._name;
+    } else {
+      return this._kind;
+    }
   }
 
   get description(): string {

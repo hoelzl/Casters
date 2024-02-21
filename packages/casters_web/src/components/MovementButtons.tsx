@@ -5,6 +5,7 @@ import styles from "./Casters.module.css";
 import { MovementButton } from "./MovementButton";
 
 export const compassDirections = ["north", "south", "east", "west"];
+
 type MovementButtonsProps = {
   actions: MoveAction[];
   resolver: Resolver;
@@ -18,12 +19,12 @@ export function MovementButtons({
 }: MovementButtonsProps) {
   return (
     <div className={styles.movementActions}>
-      {directions.map((direction, index) => {
+      {directions.map((direction) => {
         const action = actions.find((a) => a.direction === direction);
         const hidden = action === undefined;
         return (
           <MovementButton
-            key={index}
+            key={direction}
             direction={direction}
             action={action}
             resolver={resolver}
