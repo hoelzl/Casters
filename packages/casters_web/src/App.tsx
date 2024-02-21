@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Game, gameData, Location, Player } from "./exports";
-import { GameComponent } from "./GameComponent";
+import { GameComponent } from "./components/GameComponent";
 import { GameState, UpdateStateObserver } from "./GameState";
 import { Resolver, SelectActionUsingReact } from "./SelectActionUsingReact";
 
 const initialState: GameState = {
   currentLocation: new Location("Invalid Location", ""),
   availableActions: [],
+  notifications: [],
 };
 
 function createGameAndPlayer(
@@ -78,8 +79,6 @@ const App = () => {
   }, []);
 
   result = <GameComponent gameState={gameState} resolver={resolver} />;
-
-  console.log("Resolver", resolver);
   return result;
 };
 

@@ -11,6 +11,7 @@ import { Player } from "casters_core/core/Player";
 export type GameState = {
   currentLocation: Location;
   availableActions: Action[];
+  notifications: string[];
 };
 
 export function movementActions(GameState: GameState) {
