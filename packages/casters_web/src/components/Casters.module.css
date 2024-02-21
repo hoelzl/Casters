@@ -65,32 +65,21 @@ body, html {
 
 .overlay {
     color: white;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .topOverlay {
     top: 0;
     position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
     font-family: "Merriweather Bold", serif;
     font-size: 18px;
+    color: rgba(255, 255, 255, 0.75);
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) 60%, rgba(0, 0, 0, 0) 100%);
 }
 
-.descriptionBox {
-    grid-column: 2;
-    min-height: 200px;
-    max-height: 300px;
-    overflow: auto;
-    backdrop-filter: blur(5px) saturate(60%);
-}
-
-.descriptionText {
-    font-family: "Lato Regular", sans-serif;
-    font-size: 18px;
-    line-height: 1.4;
-    margin: 10px 20px;
+.topOverlay h1 {
+    margin: 10px 0 50px 0;
 }
 
 .bottomContent {
@@ -106,24 +95,38 @@ body, html {
     padding: 0 30px; /* Compensate for the column gap */
 }
 
-
 .movementActions {
     grid-column: 1;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    min-height: 200px;
-    max-width: 300px;
-    gap: 2px;
+    gap: 5px;
     place-items: center;
-    /*background: darkred;*/
+    align-items: stretch;
 }
 
 
-.movementActions.directionButton {
+.movementActions .directionButton {
     justify-content: center;
-    font-family: "Lato Black", sans-serif;
-    font-size: 12px;
+    min-width: 80px;
+}
+
+@media (max-width: 768px) {
+    .movementActions .directionButton {
+        min-width: 70px;
+    }
+}
+
+@media (max-width: 640px) {
+    .movementActions .directionButton {
+        min-width: 65px;
+    }
+}
+
+@media (max-width: 512px) {
+    .movementActions .directionButton {
+        min-width: 55px;
+    }
 }
 
 .north{}
@@ -132,23 +135,54 @@ body, html {
 .east{}
 
 .directionButton.north {
-    grid-column: 2;
+    grid-column: 3 / span 3;
     grid-row: 1;
 }
 
 .directionButton.south {
-    grid-column: 2;
+    grid-column: 3 / span 3;
     grid-row: 3;
 }
 
 .directionButton.west {
-    grid-column: 1;
+    grid-column: 1 / span 3;
     grid-row: 2;
 }
 
 .directionButton.east {
-    grid-column: 3;
+    grid-column: 5 / span 3;
     grid-row: 2;
+}
+
+.descriptionBox {
+    grid-column: 2;
+    height: 200px;
+    /*min-height: 200px;*/
+    /*max-height: 300px;*/
+    overflow: auto;
+    backdrop-filter: blur(5px) saturate(60%);
+    border: 8px solid transparent;
+    border-image: url('../ui/borders/panel-transparent-center-000.png') 30;
+    /*filter: opacity(0.85);*/
+}
+
+.descriptionText {
+    font-family: "Lato Regular", sans-serif;
+    font-size: 18px;
+    line-height: 1.4;
+    margin: 10px 20px;
+}
+
+@media (max-width: 1024px) {
+    .descriptionText {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .descriptionText {
+        font-size: 14px;
+    }
 }
 
 
@@ -166,18 +200,19 @@ body, html {
 }
 
 .otherActions .button {
-    min-width: 80px;
-    max-width: 400px;
+    width: 100%;
     height: auto; /* Adjust based on content */
 }
 
 .button {
-    border: 10px solid transparent;
+    border: 8px solid transparent;
     background-color: transparent;
     background-repeat: no-repeat;
+    font-family: "Lato Black", sans-serif;
+    font-size: 12px;
     padding: 4px;
     border-image: url('../ui/borders/panel-transparent-border-000.png') 30 fill;
-    filter: opacity(0.85);
+    filter: opacity(0.8);
 }
 
 .button:hover {
@@ -191,6 +226,7 @@ body, html {
 
 .button:disabled {
     border-image: url('../ui/borders/panel-transparent-border-003.png') 30 fill;
+    font-family: "Lato Regular", sans-serif;
 }
 
 .hidden {
@@ -203,7 +239,7 @@ body, html {
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
 }
 
 /* Track */
@@ -215,7 +251,7 @@ body, html {
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: hsl(0, 0%, 30%);
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
 /* Handle on hover */

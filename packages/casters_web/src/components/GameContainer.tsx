@@ -3,7 +3,7 @@ import { GameState } from "../GameState";
 import styles from "./Casters.module.css";
 
 export const mixedStyles = {
-  topOverlay: styles.fullWidth + " " + styles.overlay + " " + styles.topOverlay,
+  topOverlay: styles.fullWidth + " " + " " + styles.topOverlay,
   bottomContent: styles.fullWidth + " " + styles.bottomContent,
 };
 

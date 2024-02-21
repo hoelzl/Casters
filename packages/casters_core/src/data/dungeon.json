@@ -66,10 +66,10 @@
     },
     {
       "name": "Guard Room",
-      "description": "The Guard Room, once a bustling hub for the defenders of this place, now stands silent. Rusting armor and weapons line the walls, and the heavy door to the west guards the Treasure Chamber. To the east, the Dark Corridor stretches back towards light.",
+      "description": "The Guard Room, once a bustling hub for the defenders of this place, now stands silent. Rusting armor and weapons line the walls, and the heavy door to the north guards the Treasure Chamber. To the east, the Dark Corridor stretches back towards light.",
       "connections": [
         {
-          "direction": "west",
+          "direction": "north",
           "destination": "Treasure Chamber"
         },
         {
@@ -171,10 +171,10 @@
     },
     {
       "name": "Treasure Chamber",
-      "description": "The Treasure Chamber, now guarded by the silent Guard Room to the east, gleams with untold riches. Gold and jewels reflect the flickering torchlight, casting dancing shadows on the walls. The path of retreat leads east, back through the Guard Room.",
+      "description": "The Treasure Chamber, guarded by the silent Guard Room to the south, gleams with untold riches. Gold and jewels reflect the flickering torchlight, casting dancing shadows on the walls. The path of retreat leads east, back through the Guard Room.",
       "connections": [
         {
-          "direction": "east",
+          "direction": "south",
           "destination": "Guard Room"
         }
       ],
