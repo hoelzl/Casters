@@ -15,15 +15,15 @@ export class InvestigateAction implements Action {
   }
 
   async perform(player: Player): Promise<void> {
-    console.log("InvestigateAction.perform()");
-    let msg = "You investigate the area.\n";
     const items = player.location.items;
     if (items.length === 0) {
-      msg += "\nYou find nothing of interest.";
-    } else {
-      for (let item of items) {
-        msg += `\n- You find a ${item.name}.`;
-      }
+      player.notify("You investigate the area but find nothing of interest.");
+      return;
+    }
+    let msg = "You investigate the area.\n";
+    for (let item of items) {
+      item.discovered = true;
+      msg += `\n- You find a ${item.name}.`;
     }
     player.notify(msg);
   }

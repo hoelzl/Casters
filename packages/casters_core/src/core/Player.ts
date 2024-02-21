@@ -16,7 +16,6 @@ export class Player {
   private _pawn: Pawn;
   private _observers: PlayerObserver[] = [];
   private _strategy: Strategy;
-  private _actions: Action[] = [];
 
   constructor(name: string, location: Location, strategy: Strategy) {
     this._pawn = new Pawn(name, location);
@@ -30,25 +29,6 @@ export class Player {
   // noinspection JSUnusedGlobalSymbols
   set strategy(strategy: Strategy) {
     this._strategy = strategy;
-  }
-
-  get actions(): Action[] {
-    return this._actions;
-  }
-
-  set actions(actions: Action[]) {
-    this._actions = actions;
-    this.notePossibleActions(actions);
-  }
-
-  addActions(actions: Action[]): void {
-    this._actions = this._actions.concat(actions);
-    this.notePossibleActions(this._actions);
-  }
-
-  addAction(action: Action): void {
-    this._actions.push(action);
-    this.notePossibleActions(this._actions);
   }
 
   get name(): string {
@@ -78,7 +58,8 @@ export class Player {
   }
 
   getPossibleActions(addTestOnlyActions: boolean = config.debug): Action[] {
-    let result: Action[] = [];
+    console.log("Getting possible actions for player: ", this.name);
+    let result: Action[] = [...this.location.possibleActions];
     for (let [direction, _] of this.location.exits) {
       result.push(new MoveAction(direction));
     }
@@ -90,7 +71,7 @@ export class Player {
         this.getInteractiveDefaultActions(addTestOnlyActions),
       );
     }
-    this.actions = result;
+    this.notePossibleActions(result);
     return result;
   }
 
@@ -151,6 +132,7 @@ export class Player {
   }
 
   private notePossibleActions(actions: Action[]): void {
+    console.log("Notifying possible actions: ", actions);
     for (let observer of this._observers) {
       observer.notePossibleActions(this, actions);
     }

@@ -1,6 +1,13 @@
+import { TakeAction } from "../actions/TakeAction";
+import { Action } from "./Action";
 import { Item } from "./Item";
 
 export class Location {
+  private readonly _name: string;
+  private readonly _description: string;
+  private readonly _exits: Map<string, Location>;
+  private readonly _imageName: string;
+
   constructor(
     name: string,
     description: string,
@@ -13,6 +20,7 @@ export class Location {
     this._items = items;
     this._imageName = imageName;
   }
+
   get name(): string {
     return this._name;
   }
@@ -25,12 +33,24 @@ export class Location {
     return this._exits;
   }
 
-  get items(): Item[] {
-    return this._items;
+  get possibleActions(): Action[] {
+    return this.items
+      .filter((item) => item.discovered)
+      .map((item) => new TakeAction(item));
   }
 
   get imageName(): string {
     return this._imageName;
+  }
+
+  private _items: Item[];
+
+  get items(): Item[] {
+    return this._items;
+  }
+
+  removeItem(item: Item): void {
+    this._items = this._items.filter((i) => i !== item);
   }
 
   getExit(name: string): Location {
@@ -53,10 +73,4 @@ export class Location {
   dropItem(item: Item): void {
     this._items = this._items.filter((i) => i !== item);
   }
-
-  private readonly _name: string;
-  private readonly _description: string;
-  private readonly _exits: Map<string, Location>;
-  private _items: Item[];
-  private readonly _imageName: string;
 }

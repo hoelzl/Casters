@@ -14,7 +14,7 @@ export class SkipTurnAction implements Action {
     return new Set([ActionTag.SkipTurn]);
   }
 
-  async perform(_player: Player): Promise<void> {
-    // Do nothing.
+  async perform(player: Player): Promise<void> {
+    player.notify("You decide to take a small break.");
   }
 }

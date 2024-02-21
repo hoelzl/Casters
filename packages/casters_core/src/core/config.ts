@@ -1,4 +1,4 @@
 export default {
   debug: false,
-  maxNumTurns: 25,
+  maxNumTurns: 100,
 };
