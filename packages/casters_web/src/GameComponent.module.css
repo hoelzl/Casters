@@ -81,6 +81,8 @@ body, html {
 .descriptionBox {
     grid-column: 2;
     min-height: 200px;
+    max-height: 300px;
+    overflow: auto;
     backdrop-filter: blur(5px) saturate(60%);
 }
 
@@ -198,4 +200,25 @@ body, html {
 .disabled {
     pointer-events: none;
     filter: brightness(40%);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: hsl(0, 0%, 50%);
+    filter: alpha(opacity=60);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: hsl(0, 0%, 30%);
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: hsl(0, 0%, 20%);
 }
